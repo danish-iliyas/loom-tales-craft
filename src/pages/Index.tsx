@@ -8,6 +8,8 @@ import heroImage from "@/assets/hero-carpet.jpg";
 import washingImg from "@/assets/service-washing.jpg";
 import repairImg from "@/assets/service-repair.jpg";
 import restorationImg from "@/assets/service-restoration.jpg";
+import exchangeImg from "@/assets/service-exchange.jpg";
+import cleaningImg from "@/assets/service-cleaning.jpg";
 import collection1 from "@/assets/collection-1.jpg";
 import collection2 from "@/assets/collection-2.jpg";
 import collection3 from "@/assets/collection-3.jpg";
@@ -38,12 +40,25 @@ const Index = () => {
       description: "Bringing vintage carpets and shawls back to their original glory with meticulous attention to detail.",
       image: restorationImg,
     },
+    {
+      title: "Sell & Exchange",
+      description: "Trade your old carpets and shawls for new ones or get the best value with our fair exchange program.",
+      image: exchangeImg,
+    },
+    {
+      title: "Wall Hanging Care",
+      description: "Specialized cleaning and maintenance for decorative wall hangings, preserving their elegance and charm.",
+      image: cleaningImg,
+    },
   ];
 
   const collections = [
-    { image: collection1, title: "Traditional Persian" },
-    { image: collection2, title: "Vintage Restoration" },
-    { image: collection3, title: "Contemporary Designs" },
+    { image: collection1, title: "Traditional Persian Carpets", type: "Carpet" },
+    { image: collection2, title: "Vintage Kashmiri Shawls", type: "Shawl" },
+    { image: collection3, title: "Contemporary Designer Rugs", type: "Carpet" },
+    { image: washingImg, title: "Heritage Pashmina Shawls", type: "Shawl" },
+    { image: repairImg, title: "Antique Turkish Carpets", type: "Carpet" },
+    { image: restorationImg, title: "Luxury Silk Shawls", type: "Shawl" },
   ];
 
   return (
@@ -134,11 +149,11 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {featuredServices.map((service, index) => (
               <div
                 key={index}
-                className="group relative overflow-hidden rounded-lg animate-scale-in cursor-pointer"
+                className="group relative overflow-hidden rounded-lg animate-scale-in cursor-pointer shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="relative h-80 overflow-hidden">
@@ -149,22 +164,19 @@ const Index = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brown via-brown/60 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
                   
-                  <div className="absolute inset-0 flex items-end p-6">
-                    <div className="text-white">
+                  <div className="absolute inset-0 flex flex-col items-start justify-end p-6 transition-all duration-500">
+                    <div className="text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
                       <h3 className="font-display text-2xl font-bold mb-2">
                         {service.title}
                       </h3>
+                      <p className="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        {service.description}
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
-            <div className="group relative overflow-hidden rounded-lg animate-scale-in cursor-pointer bg-primary/10 flex items-center justify-center" style={{ animationDelay: "0.4s" }}>
-              <Link to="/services" className="text-center p-8">
-                <h3 className="font-display text-2xl font-bold mb-3 text-primary">Wall Hanging Care</h3>
-                <ArrowRight className="w-6 h-6 mx-auto text-primary" />
-              </Link>
-            </div>
           </div>
 
           <div className="text-center animate-fade-in">
@@ -195,12 +207,12 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {collections.map((item, index) => (
               <div
                 key={index}
                 className="group relative overflow-hidden rounded-lg animate-scale-in shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500"
-                style={{ animationDelay: `${index * 0.15}s` }}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="relative h-96 overflow-hidden">
                   <img
@@ -209,6 +221,17 @@ const Index = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brown/80 via-brown/30 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+                  
+                  <div className="absolute inset-0 flex flex-col items-start justify-end p-6 transition-all duration-500">
+                    <div className="text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
+                      <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs mb-2">
+                        {item.type}
+                      </span>
+                      <h3 className="font-display text-2xl font-bold">
+                        {item.title}
+                      </h3>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}

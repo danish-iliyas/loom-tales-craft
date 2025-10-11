@@ -23,7 +23,7 @@ const Header = () => {
   const isHomePage = location.pathname === "/";
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header className={`absolute top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isHomePage 
         ? "bg-transparent" 
         : "bg-brown/95 backdrop-blur-sm border-b border-brown-light/20"
@@ -32,8 +32,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <h1 className={`font-display text-3xl font-bold transition-colors group-hover:text-accent-dark ${
-              isHomePage ? "text-accent drop-shadow-lg" : "text-accent"
+            <h1 className={`font-display text-3xl font-bold transition-colors group-hover:text-white/80 ${
+              isHomePage ? "text-white drop-shadow-lg" : "text-accent"
             }`}>
               Loom Tales
             </h1>
@@ -48,10 +48,10 @@ const Header = () => {
                 className={`px-4 py-2 rounded-md font-body font-medium transition-all duration-300 ${
                   isActive(link.path)
                     ? isHomePage 
-                      ? "bg-accent/20 text-accent backdrop-blur-sm" 
+                      ? "bg-white/20 text-white backdrop-blur-sm" 
                       : "bg-primary text-primary-foreground"
                     : isHomePage
-                    ? "text-accent hover:text-accent-dark hover:bg-white/10 backdrop-blur-sm drop-shadow-lg"
+                    ? "text-white hover:text-white/80 hover:bg-white/10 backdrop-blur-sm drop-shadow-lg"
                     : "text-accent hover:text-accent-dark hover:bg-brown-light/30"
                 }`}
               >
@@ -67,7 +67,7 @@ const Header = () => {
               variant="outline"
               className={`${
                 isHomePage
-                  ? "border-accent text-accent bg-white/10 backdrop-blur-sm hover:bg-accent hover:text-brown drop-shadow-lg"
+                  ? "border-white text-white bg-white/10 backdrop-blur-sm hover:bg-white hover:text-brown drop-shadow-lg"
                   : "border-accent text-accent hover:bg-accent hover:text-brown"
               }`}
             >
@@ -78,7 +78,7 @@ const Header = () => {
             </Button>
             <Button asChild className={`${
               isHomePage 
-                ? "bg-accent hover:bg-accent-dark text-brown drop-shadow-lg"
+                ? "bg-white hover:bg-white/90 text-brown drop-shadow-lg"
                 : "bg-primary hover:bg-primary-dark"
             }`}>
               <Link to="/book-appointment">Book Now</Link>
@@ -90,7 +90,7 @@ const Header = () => {
             onClick={() => setIsOpen(!isOpen)}
             className={`lg:hidden p-2 transition-colors ${
               isHomePage 
-                ? "text-accent hover:text-accent-dark drop-shadow-lg"
+                ? "text-white hover:text-white/80 drop-shadow-lg"
                 : "text-accent hover:text-accent-dark"
             }`}
             aria-label="Toggle menu"
