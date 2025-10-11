@@ -1,0 +1,279 @@
+import { useState } from "react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Calendar, Clock } from "lucide-react";
+import { toast } from "sonner";
+
+const BookAppointment = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    date: "",
+    time: "",
+    details: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast.success("Appointment request sent! We'll confirm shortly via WhatsApp.");
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      service: "",
+      date: "",
+      time: "",
+      details: "",
+    });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const services = [
+    "Professional Washing",
+    "Premium Dry Cleaning",
+    "Steam Cleaning Treatment",
+    "Expert Repairing",
+    "Complete Restoration",
+    "Sell & Exchange",
+    "Special Wall Hanging Care",
+    "Moth & Pest Treatment",
+    "General Consultation",
+  ];
+
+  const timeSlots = [
+    "9:00 AM - 10:00 AM",
+    "10:00 AM - 11:00 AM",
+    "11:00 AM - 12:00 PM",
+    "12:00 PM - 1:00 PM",
+    "2:00 PM - 3:00 PM",
+    "3:00 PM - 4:00 PM",
+    "4:00 PM - 5:00 PM",
+    "5:00 PM - 6:00 PM",
+    "6:00 PM - 7:00 PM",
+  ];
+
+  return (
+    <div className="min-h-screen">
+      <Header />
+
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-br from-brown via-brown-light to-brown overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.3),transparent_50%)]" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center animate-fade-in">
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-accent mb-6">
+              Book an Appointment
+            </h1>
+            <p className="font-body text-xl text-accent/90 leading-relaxed">
+              Schedule a consultation with our experts to discuss your carpet and shawl care needs.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Appointment Form */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-card p-8 md:p-12 rounded-lg shadow-[var(--shadow-elegant)] animate-fade-in">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Personal Information */}
+                <div className="space-y-6">
+                  <h2 className="font-display text-2xl font-bold text-foreground">
+                    Personal Information
+                  </h2>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="name" className="block font-body font-medium mb-2 text-foreground">
+                        Full Name *
+                      </label>
+                      <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="John Doe"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="phone" className="block font-body font-medium mb-2 text-foreground">
+                        Phone Number *
+                      </label>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="+91 98765 43210"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block font-body font-medium mb-2 text-foreground">
+                      Email Address *
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                </div>
+
+                {/* Service Selection */}
+                <div className="space-y-6 pt-6 border-t border-border">
+                  <h2 className="font-display text-2xl font-bold text-foreground">
+                    Service Details
+                  </h2>
+
+                  <div>
+                    <label htmlFor="service" className="block font-body font-medium mb-2 text-foreground">
+                      Select Service *
+                    </label>
+                    <Select
+                      value={formData.service}
+                      onValueChange={(value) => setFormData({ ...formData, service: value })}
+                      required
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Choose a service" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {services.map((service) => (
+                          <SelectItem key={service} value={service}>
+                            {service}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="date" className="block font-body font-medium mb-2 text-foreground">
+                        Preferred Date *
+                      </label>
+                      <div className="relative">
+                        <Input
+                          id="date"
+                          name="date"
+                          type="date"
+                          required
+                          value={formData.date}
+                          onChange={handleChange}
+                          min={new Date().toISOString().split('T')[0]}
+                        />
+                        <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="time" className="block font-body font-medium mb-2 text-foreground">
+                        Preferred Time *
+                      </label>
+                      <Select
+                        value={formData.time}
+                        onValueChange={(value) => setFormData({ ...formData, time: value })}
+                        required
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Choose a time slot" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {timeSlots.map((slot) => (
+                            <SelectItem key={slot} value={slot}>
+                              {slot}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="details" className="block font-body font-medium mb-2 text-foreground">
+                      Additional Details
+                    </label>
+                    <Textarea
+                      id="details"
+                      name="details"
+                      value={formData.details}
+                      onChange={handleChange}
+                      placeholder="Tell us about your carpet or shawl, any specific concerns, or questions you have..."
+                      rows={5}
+                      className="resize-none"
+                    />
+                  </div>
+                </div>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-primary hover:bg-primary-dark text-lg h-14"
+                >
+                  Schedule Appointment
+                </Button>
+
+                <p className="text-center font-body text-sm text-muted-foreground">
+                  We'll confirm your appointment via WhatsApp and email within 2-4 hours during business hours.
+                </p>
+              </form>
+            </div>
+
+            {/* Alternative Contact */}
+            <div className="mt-12 p-8 bg-secondary rounded-lg text-center">
+              <h2 className="font-display text-2xl font-bold mb-4 text-foreground">
+                Prefer to Book Directly?
+              </h2>
+              <p className="font-body text-lg text-muted-foreground mb-6">
+                Contact us via WhatsApp for immediate assistance and instant appointment confirmation.
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="bg-primary hover:bg-primary-dark"
+              >
+                <a
+                  href="https://wa.me/+911234567890?text=Hi, I'd like to book an appointment"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Book via WhatsApp
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default BookAppointment;
