@@ -105,7 +105,7 @@ const Services = () => {
 
       {/* Carpet Services */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-2 sm:px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
               Carpet Care Services
@@ -130,7 +130,7 @@ const Services = () => {
 
       {/* Shawl Services */}
       <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-2 sm:px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
               Shawl Care Services

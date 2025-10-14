@@ -12,34 +12,30 @@ interface ServiceCardProps {
 const ServiceCard = ({ title, description, image, index }: ServiceCardProps) => {
   return (
     <div
-      className="vintage-card group"
+      className="group animate-fade-in bg-secondary/50 overflow-hidden"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="vintage-overlay opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
       </div>
-      <div className="p-6 bg-card">
-        <h3 className="font-display text-2xl font-semibold mb-3 text-foreground">
+      <div className="p-6">
+        <h3 className="font-display text-xl font-semibold mb-3 text-primary">
           {title}
         </h3>
-        <p className="font-body text-muted-foreground leading-relaxed mb-6">
+        <p className="font-body text-muted-foreground leading-relaxed mb-4 text-sm">
           {description}
         </p>
-        <Button
-          asChild
-          variant="ghost"
-          className="group/btn text-primary hover:text-primary-dark hover:bg-primary/5 p-0"
+        <Link 
+          to="/book-appointment" 
+          className="inline-flex items-center text-primary hover:text-primary-dark font-medium transition-colors text-sm"
         >
-          <Link to="/book-appointment" className="flex items-center gap-2">
-            Book This Service
-            <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-          </Link>
-        </Button>
+          Book Now
+          <ArrowRight className="w-4 h-4 ml-2" />
+        </Link>
       </div>
     </div>
   );

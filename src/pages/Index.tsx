@@ -170,7 +170,7 @@ const Index = () => {
 
       {/* Carpet Care Services */}
       <section className="py-24 bg-background">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-2 sm:px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
             <div className="inline-block mb-4">
               <svg className="w-12 h-12 mx-auto text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -219,7 +219,7 @@ const Index = () => {
 
       {/* Shawl Care Services */}
       <section className="py-24 bg-gradient-to-b from-background to-secondary/30">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-2 sm:px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
             <div className="inline-block mb-4">
               <svg className="w-12 h-12 mx-auto text-primary" viewBox="0 0 100 50" fill="none" stroke="currentColor">
@@ -277,7 +277,7 @@ const Index = () => {
 
       {/* Collections Section */}
       <section className="py-24 bg-gradient-to-b from-background to-secondary/30">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-2 sm:px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
             <div className="inline-block mb-4">
               <svg className="w-12 h-12 mx-auto text-primary" viewBox="0 0 100 50" fill="none" stroke="currentColor">
