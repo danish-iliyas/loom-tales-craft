@@ -6,47 +6,71 @@ import repairImg from "@/assets/service-repair.jpg";
 import restorationImg from "@/assets/service-restoration.jpg";
 import exchangeImg from "@/assets/service-exchange.jpg";
 import cleaningImg from "@/assets/service-cleaning.jpg";
+import heroImage from "@/assets/hero-carpet.jpg";
 
 const Services = () => {
-  const services = [
+  const carpetServices = [
     {
       title: "Professional Washing",
-      description: "We offer multiple washing techniques tailored to your textile's specific needs. From delicate hand-washing to specialized deep cleaning, each method preserves the fabric's integrity while removing years of accumulated dirt and grime. Our artisans use traditional soaps and modern cleaning solutions to ensure optimal results.",
-      image: washingImg,
-    },
-    {
-      title: "Premium Dry Cleaning",
-      description: "For sensitive materials that require extra care, our premium dry cleaning service uses eco-friendly solvents that gently lift stains without water damage. Perfect for antique silks, delicate wool blends, and precious heritage pieces that cannot withstand traditional washing methods.",
+      description: "We offer multiple washing techniques tailored to your carpet's specific needs. From delicate hand-washing to specialized deep cleaning, each method preserves the fabric's integrity while removing years of accumulated dirt and grime.",
       image: washingImg,
     },
     {
       title: "Steam Cleaning Treatment",
-      description: "Our advanced steam cleaning technology penetrates deep into carpet fibers, eliminating allergens, dust mites, and embedded dirt particles. This method is especially effective for high-traffic carpets and provides a thorough sanitization that's safe for families and pets.",
+      description: "Our advanced steam cleaning technology penetrates deep into carpet fibers, eliminating allergens, dust mites, and embedded dirt particles. This method is especially effective for high-traffic carpets.",
       image: washingImg,
     },
     {
       title: "Expert Repairing",
-      description: "Master craftsmen meticulously restore damaged areas using traditional hand-weaving techniques. We match original patterns, colors, and textures to seamlessly blend repairs with the existing fabric. From small frays to extensive damage, we handle all repair work with precision and care.",
+      description: "Master craftsmen meticulously restore damaged areas using traditional hand-weaving techniques. We match original patterns, colors, and textures to seamlessly blend repairs with the existing fabric.",
       image: repairImg,
     },
     {
       title: "Complete Restoration",
-      description: "Bring vintage and antique carpets back to their former glory through our comprehensive restoration service. We address structural damage, color fading, and pattern loss using authentic materials and time-honored restoration methods passed down through generations of artisans.",
+      description: "Bring vintage and antique carpets back to their former glory through our comprehensive restoration service. We address structural damage, color fading, and pattern loss using authentic materials.",
       image: restorationImg,
     },
     {
-      title: "Sell & Exchange Program",
-      description: "Looking to upgrade or part with your old carpets and shawls? Our sell and exchange program offers fair valuations for quality pieces. We connect sellers with collectors and enthusiasts, ensuring your textiles find appreciative new homes while you explore our curated collection.",
-      image: exchangeImg,
-    },
-    {
-      title: "Special Wall Hanging Care",
-      description: "Wall hangings require specialized cleaning techniques due to their vertical display and unique mounting. Our experts carefully remove, clean, restore, and rehang decorative carpets and tapestries, ensuring they remain stunning focal points in your space for years to come.",
+      title: "Wall Hanging Care",
+      description: "Wall hangings require specialized cleaning techniques due to their vertical display. Our experts carefully remove, clean, restore, and rehang decorative carpets and tapestries.",
       image: cleaningImg,
     },
     {
       title: "Moth & Pest Treatment",
-      description: "Protect your investment with our professional moth and pest treatment services. We use safe, effective solutions to eliminate existing infestations and prevent future damage, ensuring your carpets and shawls remain pristine for generations.",
+      description: "Protect your investment with our professional moth and pest treatment services. We use safe, effective solutions to eliminate existing infestations and prevent future damage.",
+      image: cleaningImg,
+    },
+  ];
+
+  const shawlServices = [
+    {
+      title: "Delicate Shawl Washing",
+      description: "Specialized hand-washing techniques for precious Pashmina and Kashmiri shawls using traditional methods. Our gentle approach preserves the softness and luster of fine wool fibers.",
+      image: washingImg,
+    },
+    {
+      title: "Premium Dry Cleaning",
+      description: "For sensitive materials that require extra care, our premium dry cleaning service uses eco-friendly solvents. Perfect for antique silks and delicate wool blends.",
+      image: washingImg,
+    },
+    {
+      title: "Shawl Restoration",
+      description: "Expert restoration of vintage shawls, repairing tears and reviving faded colors with authentic materials. We specialize in bringing heritage pieces back to life.",
+      image: restorationImg,
+    },
+    {
+      title: "Embroidery Repair",
+      description: "Intricate embroidery work requires master craftsmanship. Our artisans carefully repair and restore embellished shawls, matching thread colors and stitching patterns perfectly.",
+      image: repairImg,
+    },
+    {
+      title: "Sell & Exchange Program",
+      description: "Looking to upgrade your shawl collection? Our sell and exchange program offers fair valuations for quality pieces, connecting you with new treasures.",
+      image: exchangeImg,
+    },
+    {
+      title: "Preservation Services",
+      description: "Professional preservation techniques to protect your valuable shawls from environmental damage, moths, and aging. Includes proper storage solutions and care guidance.",
       image: cleaningImg,
     },
   ];
@@ -55,12 +79,18 @@ const Services = () => {
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brown via-brown-light to-brown overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.3),transparent_50%)]" />
+      {/* Hero Section with Background */}
+      <section className="relative min-h-[500px] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={heroImage}
+            alt="Our Premium Services"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-brown/90 via-brown/80 to-brown/70" />
         </div>
-        <div className="container mx-auto px-4 relative z-10">
+        
+        <div className="relative z-10 container mx-auto px-4 py-24">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
             <h1 className="font-display text-5xl md:text-6xl font-bold text-accent mb-6">
               Our Premium Services
@@ -73,11 +103,44 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Carpet Services */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              Carpet Care Services
+            </h2>
+            <p className="font-body text-lg text-muted-foreground leading-relaxed">
+              Expert care for your precious carpets and rugs
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {carpetServices.map((service, index) => (
+              <ServiceCard
+                key={index}
+                title={service.title}
+                description={service.description}
+                image={service.image}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Shawl Services */}
+      <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              Shawl Care Services
+            </h2>
+            <p className="font-body text-lg text-muted-foreground leading-relaxed">
+              Specialized care for your treasured Pashmina and Kashmiri shawls
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {shawlServices.map((service, index) => (
               <ServiceCard
                 key={index}
                 title={service.title}

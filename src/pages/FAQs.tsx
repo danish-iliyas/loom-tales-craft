@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import heroImage from "@/assets/hero-carpet.jpg";
 
 const FAQs = () => {
   const faqs = [
@@ -75,12 +76,18 @@ const FAQs = () => {
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-brown via-brown-light to-brown overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.3),transparent_50%)]" />
+      {/* Hero Section with Background */}
+      <section className="relative min-h-[400px] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={heroImage}
+            alt="FAQs"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-brown/90 via-brown/80 to-brown/70" />
         </div>
-        <div className="container mx-auto px-4 relative z-10">
+        
+        <div className="relative z-10 container mx-auto px-4 py-24">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
             <h1 className="font-display text-5xl md:text-6xl font-bold text-accent mb-6">
               Frequently Asked Questions

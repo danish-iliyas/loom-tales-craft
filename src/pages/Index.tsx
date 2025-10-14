@@ -24,10 +24,10 @@ const Index = () => {
     "Trusted by Generations",
   ];
 
-  const featuredServices = [
+  const carpetServices = [
     {
       title: "Professional Washing",
-      description: "Gentle yet thorough cleaning methods that preserve the integrity and beauty of your precious textiles.",
+      description: "Gentle yet thorough cleaning methods that preserve the integrity and beauty of your precious carpets.",
       image: washingImg,
     },
     {
@@ -37,18 +37,54 @@ const Index = () => {
     },
     {
       title: "Complete Restoration",
-      description: "Bringing vintage carpets and shawls back to their original glory with meticulous attention to detail.",
+      description: "Bringing vintage carpets back to their original glory with meticulous attention to detail.",
       image: restorationImg,
-    },
-    {
-      title: "Sell & Exchange",
-      description: "Trade your old carpets and shawls for new ones or get the best value with our fair exchange program.",
-      image: exchangeImg,
     },
     {
       title: "Wall Hanging Care",
       description: "Specialized cleaning and maintenance for decorative wall hangings, preserving their elegance and charm.",
       image: cleaningImg,
+    },
+  ];
+
+  const shawlServices = [
+    {
+      title: "Delicate Shawl Washing",
+      description: "Specialized hand-washing techniques for precious Pashmina and Kashmiri shawls using traditional methods.",
+      image: washingImg,
+    },
+    {
+      title: "Shawl Restoration",
+      description: "Expert restoration of vintage shawls, repairing tears and reviving faded colors with authentic materials.",
+      image: restorationImg,
+    },
+    {
+      title: "Premium Dry Cleaning",
+      description: "Eco-friendly dry cleaning for sensitive shawl materials that require extra care and gentle handling.",
+      image: cleaningImg,
+    },
+    {
+      title: "Sell & Exchange",
+      description: "Trade your old shawls for new ones or get the best value with our fair exchange program.",
+      image: exchangeImg,
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: "Priya Sharma",
+      review: "Loom Tales transformed my grandmother's antique carpet. The restoration work is exceptional, and it looks as beautiful as it did decades ago. Highly recommend their services!",
+      rating: 5,
+    },
+    {
+      name: "Rajesh Kumar",
+      review: "Professional, trustworthy, and skilled artisans. They handled my precious Pashmina shawl with such care. The cleaning results exceeded my expectations.",
+      rating: 5,
+    },
+    {
+      name: "Anita Desai",
+      review: "I've been using Loom Tales for years. Their attention to detail and commitment to preserving the heritage of each piece is unmatched. A true gem in carpet care.",
+      rating: 5,
     },
   ];
 
@@ -132,7 +168,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Services */}
+      {/* Carpet Care Services */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
@@ -149,8 +185,57 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {featuredServices.map((service, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {carpetServices.map((service, index) => (
+              <div
+                key={index}
+                className="group relative overflow-hidden rounded-lg animate-scale-in cursor-pointer shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="relative h-80 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brown via-brown/60 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
+                  
+                  <div className="absolute inset-0 flex flex-col items-start justify-end p-6 transition-all duration-500">
+                    <div className="text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
+                      <h3 className="font-display text-2xl font-bold mb-2">
+                        {service.title}
+                      </h3>
+                      <p className="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Shawl Care Services */}
+      <section className="py-24 bg-gradient-to-b from-background to-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+            <div className="inline-block mb-4">
+              <svg className="w-12 h-12 mx-auto text-primary" viewBox="0 0 100 50" fill="none" stroke="currentColor">
+                <path d="M20,25 Q30,10 50,25 T80,25" strokeWidth="2" strokeLinecap="round" fill="none"/>
+              </svg>
+            </div>
+            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-foreground">
+              Shawl Care Services
+            </h2>
+            <p className="font-body text-lg text-muted-foreground leading-relaxed">
+              Specialized care for your treasured Pashmina and Kashmiri shawls
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {shawlServices.map((service, index) => (
               <div
                 key={index}
                 className="group relative overflow-hidden rounded-lg animate-scale-in cursor-pointer shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500"
@@ -244,6 +329,57 @@ const Index = () => {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 bg-gradient-to-b from-secondary/30 to-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-foreground">
+              What Our Customers Say
+            </h2>
+            <p className="font-body text-lg text-muted-foreground leading-relaxed">
+              Real experiences from our valued clients who trust us with their precious textiles
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="bg-card p-8 rounded-lg shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 animate-scale-in"
+                style={{ animationDelay: `${index * 0.15}s` }}
+              >
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <svg
+                      key={i}
+                      className="w-5 h-5 text-primary fill-current"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="font-body text-muted-foreground italic mb-6 leading-relaxed">
+                  "{testimonial.review}"
+                </p>
+                <p className="font-display text-lg font-semibold text-foreground">
+                  - {testimonial.name}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center animate-fade-in">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-secondary rounded-full">
+              <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
+              </svg>
+              <span className="font-body text-muted-foreground">Watch customer testimonial videos on our social media</span>
+            </div>
           </div>
         </div>
       </section>

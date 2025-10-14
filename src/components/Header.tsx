@@ -14,6 +14,7 @@ const Header = () => {
     { path: "/services", label: "Services" },
     { path: "/collection", label: "Collection" },
     { path: "/about", label: "About Us" },
+    { path: "/blog", label: "Blog" },
     { path: "/faqs", label: "FAQs" },
     { path: "/contact", label: "Contact" },
   ];
@@ -45,17 +46,22 @@ const Header = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-md font-body font-medium transition-all duration-300 ${
+                className={`relative px-4 py-2 font-body font-medium transition-all duration-300 group ${
                   isActive(link.path)
                     ? isHomePage 
-                      ? "bg-white/20 text-white backdrop-blur-sm" 
-                      : "bg-primary text-primary-foreground"
+                      ? "text-white" 
+                      : "text-primary"
                     : isHomePage
-                    ? "text-white hover:text-white/80 hover:bg-white/10 backdrop-blur-sm drop-shadow-lg"
-                    : "text-accent hover:text-accent-dark hover:bg-brown-light/30"
+                    ? "text-white hover:text-white"
+                    : "text-accent hover:text-primary"
                 }`}
               >
                 {link.label}
+                <span className={`absolute bottom-0 left-0 w-full h-0.5 transform origin-left transition-transform duration-300 ${
+                  isActive(link.path)
+                    ? "scale-x-100"
+                    : "scale-x-0 group-hover:scale-x-100"
+                } ${isHomePage ? "bg-white" : "bg-primary"}`} />
               </Link>
             ))}
           </nav>
