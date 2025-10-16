@@ -5,7 +5,11 @@
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
-
+/* Add this to your globals.css file to fix the scrollbar issue */
+body:has([data-radix-popper-content-wrapper]) {
+  overflow: visible !important;
+  padding-right: 0 !important;
+}
 @layer base {
   :root {
     /* Vintage Warm Palette */

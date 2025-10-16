@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ServiceCard from "@/components/ServiceCard";
+import ServiceCard from "@/components/ServiceCard"; // Assuming this component exists
 import washingImg from "@/assets/service-washing.jpg";
 import repairImg from "@/assets/service-repair.jpg";
 import restorationImg from "@/assets/service-restoration.jpg";
@@ -12,82 +12,53 @@ const Services = () => {
   const carpetServices = [
     {
       title: "Professional Washing",
-      description: "We offer multiple washing techniques tailored to your carpet's specific needs. From delicate hand-washing to specialized deep cleaning, each method preserves the fabric's integrity while removing years of accumulated dirt and grime.",
-      image: washingImg,
-    },
-    {
-      title: "Steam Cleaning Treatment",
-      description: "Our advanced steam cleaning technology penetrates deep into carpet fibers, eliminating allergens, dust mites, and embedded dirt particles. This method is especially effective for high-traffic carpets.",
+      description: "Tailored washing techniques to preserve your carpet's integrity while removing dirt.",
       image: washingImg,
     },
     {
       title: "Expert Repairing",
-      description: "Master craftsmen meticulously restore damaged areas using traditional hand-weaving techniques. We match original patterns, colors, and textures to seamlessly blend repairs with the existing fabric.",
+      description: "Master craftsmen meticulously restore damaged areas using traditional techniques.",
       image: repairImg,
     },
     {
       title: "Complete Restoration",
-      description: "Bring vintage and antique carpets back to their former glory through our comprehensive restoration service. We address structural damage, color fading, and pattern loss using authentic materials.",
+      description: "Bring vintage and antique carpets back to their former glory with our comprehensive service.",
       image: restorationImg,
-    },
-    {
-      title: "Wall Hanging Care",
-      description: "Wall hangings require specialized cleaning techniques due to their vertical display. Our experts carefully remove, clean, restore, and rehang decorative carpets and tapestries.",
-      image: cleaningImg,
-    },
-    {
-      title: "Moth & Pest Treatment",
-      description: "Protect your investment with our professional moth and pest treatment services. We use safe, effective solutions to eliminate existing infestations and prevent future damage.",
-      image: cleaningImg,
     },
   ];
 
   const shawlServices = [
     {
       title: "Delicate Shawl Washing",
-      description: "Specialized hand-washing techniques for precious Pashmina and Kashmiri shawls using traditional methods. Our gentle approach preserves the softness and luster of fine wool fibers.",
-      image: washingImg,
-    },
-    {
-      title: "Premium Dry Cleaning",
-      description: "For sensitive materials that require extra care, our premium dry cleaning service uses eco-friendly solvents. Perfect for antique silks and delicate wool blends.",
+      description: "Specialized hand-washing for precious Pashmina and Kashmiri shawls.",
       image: washingImg,
     },
     {
       title: "Shawl Restoration",
-      description: "Expert restoration of vintage shawls, repairing tears and reviving faded colors with authentic materials. We specialize in bringing heritage pieces back to life.",
+      description: "Expert restoration of vintage shawls, repairing tears and reviving faded colors.",
       image: restorationImg,
     },
     {
-      title: "Embroidery Repair",
-      description: "Intricate embroidery work requires master craftsmanship. Our artisans carefully repair and restore embellished shawls, matching thread colors and stitching patterns perfectly.",
-      image: repairImg,
-    },
-    {
       title: "Sell & Exchange Program",
-      description: "Looking to upgrade your shawl collection? Our sell and exchange program offers fair valuations for quality pieces, connecting you with new treasures.",
+      description: "Upgrade your shawl collection with our program that offers fair valuations for quality pieces.",
       image: exchangeImg,
-    },
-    {
-      title: "Preservation Services",
-      description: "Professional preservation techniques to protect your valuable shawls from environmental damage, moths, and aging. Includes proper storage solutions and care guidance.",
-      image: cleaningImg,
     },
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="bg-background">
       <Header />
 
-      {/* Hero Section with Background */}
-      <section className="relative min-h-[500px] flex items-center justify-center overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-[500px] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0">
           <img
             src={heroImage}
             alt="Our Premium Services"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brown/90 via-brown/80 to-brown/70" />
+          {/* MODIFIED: Gradient is more transparent for a clearer image */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brown/60 via-brown/50 to-brown/40" />
         </div>
         
         <div className="relative z-10 container mx-auto px-4 py-24">
@@ -96,22 +67,21 @@ const Services = () => {
               Our Premium Services
             </h1>
             <p className="font-body text-xl text-accent/90 leading-relaxed">
-              Comprehensive care solutions for your precious carpets and shawls. Each service combines 
-              traditional craftsmanship with modern techniques to deliver exceptional results.
+              Comprehensive care solutions for your precious carpets and shawls, combining traditional craftsmanship with modern techniques.
             </p>
           </div>
         </div>
       </section>
 
       {/* Carpet Services */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-2 sm:px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
               Carpet Care Services
             </h2>
             <p className="font-body text-lg text-muted-foreground leading-relaxed">
-              Expert care for your precious carpets and rugs
+              From deep cleaning to intricate restoration, we provide expert care to preserve the beauty and value of your carpets.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -129,14 +99,14 @@ const Services = () => {
       </section>
 
       {/* Shawl Services */}
-      <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
-        <div className="container mx-auto px-2 sm:px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+      <section className="py-24 bg-secondary">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
               Shawl Care Services
             </h2>
             <p className="font-body text-lg text-muted-foreground leading-relaxed">
-              Specialized care for your treasured Pashmina and Kashmiri shawls
+              Delicate handling and specialized treatments for your treasured Pashmina, Kashmiri, and other fine shawls.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -149,42 +119,6 @@ const Services = () => {
                 index={index}
               />
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-center mb-12 text-foreground">
-              Why Choose Loom Tales?
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  title: "Generations of Expertise",
-                  description: "Our artisans bring decades of traditional knowledge and modern training to every project.",
-                },
-                {
-                  title: "Premium Materials Only",
-                  description: "We use only the finest cleaning products, threads, and restoration materials available.",
-                },
-                {
-                  title: "Customized Care Plans",
-                  description: "Every textile receives a personalized treatment plan based on its unique needs and condition.",
-                },
-                {
-                  title: "Transparent Pricing",
-                  description: "No hidden fees or surprises. We provide detailed quotes upfront and honor our commitments.",
-                },
-              ].map((item, index) => (
-                <div key={index} className="p-6 bg-card rounded-lg shadow-[var(--shadow-soft)] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <h3 className="font-display text-xl font-semibold mb-3 text-foreground">{item.title}</h3>
-                  <p className="font-body text-muted-foreground leading-relaxed">{item.description}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

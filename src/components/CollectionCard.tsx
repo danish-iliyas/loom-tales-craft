@@ -14,10 +14,10 @@ const CollectionCard = ({ title, description, image, index }: CollectionCardProp
 
   return (
     <div
-      className="group animate-fade-in bg-secondary/50 overflow-hidden"
+      className="group animate-fade-in  overflow-hidden bg-stone-50 shadow-xl border border-stone-300"
       style={{ animationDelay: `${index * 0.15}s` }}
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden p-[10px]">
         <img
           src={image}
           alt={title}
