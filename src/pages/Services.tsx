@@ -63,10 +63,10 @@ const Services = () => {
         
         <div className="relative z-10 container mx-auto px-4 py-24">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-accent mb-6">
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
               Our Premium Services
             </h1>
-            <p className="font-body text-xl text-accent/90 leading-relaxed">
+            <p className="font-body text-xl text-white/90 leading-relaxed">
               Comprehensive care solutions for your precious carpets and shawls, combining traditional craftsmanship with modern techniques.
             </p>
           </div>
@@ -77,7 +77,7 @@ const Services = () => {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-[#794299]">
               Carpet Care Services
             </h2>
             <p className="font-body text-lg text-muted-foreground leading-relaxed">
@@ -102,7 +102,7 @@ const Services = () => {
       <section className="py-24 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-[#794299]">
               Shawl Care Services
             </h2>
             <p className="font-body text-lg text-muted-foreground leading-relaxed">

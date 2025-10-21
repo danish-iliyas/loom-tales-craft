@@ -56,10 +56,10 @@ const Blog = () => {
         
         <div className="relative z-10 container mx-auto px-4 py-24">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-accent mb-6">
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
               Stories & Insights
             </h1>
-            <p className="font-body text-xl text-accent/90 leading-relaxed">
+            <p className="font-body text-xl text-white/90 leading-relaxed">
               Explore the art, heritage, and craftsmanship behind every thread.
             </p>
           </div>
@@ -86,7 +86,7 @@ const Blog = () => {
                 
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary rounded-full">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#6a2e8c] rounded-full text-white">
                       <Tag className="w-3 h-3" />
                       {post.category}
                     </span>
@@ -96,7 +96,7 @@ const Blog = () => {
                     </span>
                   </div>
                   
-                  <h3 className="font-display text-2xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
+                  <h3 className="font-display text-2xl font-bold mb-3 text-foreground group-hover:text-[#794299] transition-colors">
                     {post.title}
                   </h3>
                   
@@ -106,7 +106,7 @@ const Blog = () => {
                   
                   <Button
                     variant="link"
-                    className="text-primary hover:text-primary-dark p-0 h-auto justify-start self-start group-hover:gap-2 transition-all mt-auto"
+                    className="text-[#794299] hover:text-[#62009b] p-0 h-auto justify-start self-start group-hover:gap-2 transition-all mt-auto"
                   >
                     Read More
                     <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -122,7 +122,7 @@ const Blog = () => {
       <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-[#794299] mb-6">
               Stay Connected
             </h2>
             <p className="font-body text-lg text-muted-foreground mb-8">
@@ -134,7 +134,7 @@ const Blog = () => {
                 placeholder="Enter your email"
                 className="flex-1 px-6 py-3 rounded-lg font-body bg-background border focus:outline-none focus:ring-2 focus:ring-primary"
               />
-              <Button size="lg" className="bg-primary hover:bg-primary-dark text-white">
+              <Button size="lg" className="bg-[#794299] hover:bg-[#62009b] text-white">
                 Subscribe
               </Button>
             </div>

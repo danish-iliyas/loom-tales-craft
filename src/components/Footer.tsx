@@ -6,7 +6,7 @@ const Footer = () => {
   const email = "info@loomtales.com";
 
   return (
-    <footer className="bg-brown text-accent border-t border-brown-light/20">
+    <footer className="bg-[#6d44a6] text-[#FFFFFF] border-t border-brown-light/20">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}

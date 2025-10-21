@@ -13,6 +13,9 @@ import cleaningImg from "@/assets/service-cleaning.jpg";
 import collection1 from "@/assets/collection-1.jpg";
 import collection2 from "@/assets/collection-2.jpg";
 import collection3 from "@/assets/collection-3.jpg";
+// 1. Import InView
+import { InView } from 'react-intersection-observer';
+
 
 // This is the SVG you provided, turned into a reusable component
 const SectionIcon = () => (
@@ -20,7 +23,7 @@ const SectionIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 100 100"
     // Classes for sizing and layout are kept
-    className="w-16 h-16 mx-auto mb-4" 
+    className="w-16 h-16 mx-auto mb-4"
   >
     <defs>
       {/* Gradients for the petals */}
@@ -32,7 +35,7 @@ const SectionIcon = () => (
         <stop offset="0%" style={{ stopColor: '#8E44AD' }} />
         <stop offset="100%" style={{ stopColor: '#512E5F' }} />
       </radialGradient>
-      
+
       {/* Filter for a subtle drop shadow effect */}
       <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
         <feGaussianBlur in="SourceAlpha" stdDeviation="1" />
@@ -58,7 +61,7 @@ const SectionIcon = () => (
       <use href="#petal" transform="scale(1.05) rotate(180 50 50)" />
       <use href="#petal" transform="scale(1.05) rotate(270 50 50)" />
     </g>
-    
+
     {/* Front petals */}
     <g fill="url(#frontPetalGradient)">
       <use href="#petal" />
@@ -66,7 +69,7 @@ const SectionIcon = () => (
       <use href="#petal" transform="rotate(180 50 50)" />
       <use href="#petal" transform="rotate(270 50 50)" />
     </g>
-    
+
     {/* Detailed center design */}
     <g>
       <circle cx="50" cy="50" r="12" fill="white" style={{ filter: 'url(#dropShadow)' }} />
@@ -307,7 +310,7 @@ const Index = () => {
                 className="flex items-center gap-3 animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
+                <CheckCircle className="w-5 h-5 text-[#794299] flex-shrink-0" />
                 <span className="font-body font-medium text-foreground">
                   {feature}
                 </span>
@@ -318,95 +321,82 @@ const Index = () => {
       </section>
 
       {/* Carpet Care Services */}
-
-     <section className="pt-16 pb-0 bg-white">
-  <div className="container mx-auto px-2 sm:px-4">
-    <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
-      <div className="inline-block mb-[4px]">
-        {/* Assume SectionIcon renders the purple flower/icon */}
-        <SectionIcon />
-      </div>
-
-      {/* Updated colors/font to match the 'Collections' section: Muted Purple/Black */}
-      <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
-       Carpet Care Services
-      </h2>
-      <p className="font-body text-lg text-neutral-500 leading-relaxed">
-        Beautifully crafted and ethically sourced, our handmade area rugs bring warmth, style, and authenticity to any space. Expertly woven by skilled artisans, each rug tells a unique story of tradition and craftsmanship.
-      </p>
-    </div>
-
-    {/* CARDS GRID */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-      {/* Using placeholder data structure for the mapping */}
-      {carpetServices.map((service, index) => (
-        <div
-          key={index}
-          className="
-            group relative overflow-hidden rounded-md
-            bg-white
-            border border-gray-200
-            cursor-pointer
-            animate-scale-in transition-all duration-300
-            
-            /* VINTAGE GLOW EFFECT (Approximation using default classes) */
-           shadow-lg
-hover:shadow-xl
-hover:shadow-purple-600/60
-hover:border-gray-600/40
-transform hover:scale-[1.02]
-          "
-          style={{ animationDelay: `${index * 0.1}s` }}
-        >
-          {/* IMAGE CONTAINER (Kept height/transition) */}
-          <div className="relative h-72 overflow-hidden">
-            {/* Added Sepia filter for extra vintage feel, which was recommended earlier */}
-            <img
-              src={service.image}
-              alt={service.title}
-              className=" w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter group-hover:sepia-0 sepia-50"
-            />
+      <section className="pt-16 pb-0 bg-white">
+        <div className="container mx-auto px-2 sm:px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+            <div className="inline-block mb-[4px]">
+              <SectionIcon />
+            </div>
+            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
+             Carpet Care Services
+            </h2>
+            <p className="font-body text-lg text-neutral-500 leading-relaxed">
+              Beautifully crafted and ethically sourced, our handmade area rugs bring warmth, style, and authenticity to any space. Expertly woven by skilled artisans, each rug tells a unique story of tradition and craftsmanship.
+            </p>
           </div>
 
-          {/* TEXT CONTENT (Moved out of the overlay/image container) */}
-          <div className="p-5 text-center">
-            {/* Title: Muted black/brown color, slightly larger font */}
-            <h3 className="font-display text-2xl font-semibold mb-2 text-[#723983]">
-              {service.title}
-            </h3>
-
-            {/* Description: Subtler text color and size */}
-            <p className="font-body text-sm text-neutral-600 leading-relaxed mb-4">
-              {service.description}
-            </p>
-
-            {/* View All Link: Prominent text color matching the headline purple */}
-            <a
-                href="#"
-                className="
-                    inline-flex items-center
-                    text-[#5A386D] font-medium
-                    hover:text-[#5A386D]
-                    transition-colors text-base
-                "
-            >
-              View All
-            </a>
+          {/* CARDS GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {/* 2. Update Carpet Care Services Card Mapping */}
+            {carpetServices.map((service, index) => (
+              <InView key={index} triggerOnce threshold={0.1} rootMargin="0px 0px -50px 0px">
+                {({ ref, inView }) => (
+                  <div
+                    ref={ref}
+                    className={`
+                      group relative overflow-hidden rounded-md
+                      bg-white
+                      border border-gray-200
+                      cursor-pointer
+                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
+                      shadow-lg
+                      hover:shadow-xl
+                      hover:shadow-purple-600/60
+                      hover:border-gray-600/40
+                      transform hover:scale-[1.02]
+                      ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} // Conditional animation styles
+                    `}
+                    style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
+                  >
+                    {/* IMAGE CONTAINER */}
+                    <div className="relative h-72 overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter group-hover:sepia-0 sepia-50"
+                      />
+                    </div>
+                    {/* TEXT CONTENT */}
+                    <div className="p-5 text-center">
+                      <h3 className="font-display text-2xl font-semibold mb-2 text-[#723983]">
+                        {service.title}
+                      </h3>
+                      <p className="font-body text-sm text-neutral-600 leading-relaxed mb-4">
+                        {service.description}
+                      </p>
+                      <a
+                        href="#" // Assuming this should link somewhere, update href as needed
+                        className="inline-flex items-center text-[#5A386D] font-medium hover:text-[#5A386D] transition-colors text-base"
+                      >
+                        View All
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </InView>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
-      {/* Shawl Care Services */}
+      </section>
 
+      {/* Shawl Care Services */}
       <section className="pt-4 pb-0 bg-gradient-to-b from-background to-secondary/30">
         <div className="container mx-auto px-2 sm:px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
             <div className="inline-block mb-[4px]">
               <SectionIcon />
             </div>
-            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-foreground">
+            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
               Shawl Care Services
             </h2>
             <p className="font-body text-lg text-muted-foreground leading-relaxed">
@@ -415,32 +405,41 @@ transform hover:scale-[1.02]
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {/* 2. Update Shawl Care Services Card Mapping */}
             {shawlServices.map((service, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded animate-scale-in cursor-pointer shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="relative h-80 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brown via-brown/60 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
-
-                  <div className="absolute inset-0 flex flex-col items-start justify-end p-6 transition-all duration-500">
-                    <div className="text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
-                      <h3 className="font-display text-2xl font-bold mb-2">
-                        {service.title}
-                      </h3>
-                      <p className="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        {service.description}
-                      </p>
+              <InView key={index} triggerOnce threshold={0.1} rootMargin="0px 0px -50px 0px">
+                {({ ref, inView }) => (
+                  <div
+                    ref={ref}
+                    className={`
+                      group relative overflow-hidden rounded cursor-pointer
+                      shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]
+                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
+                      ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} // Conditional animation styles
+                    `}
+                    style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
+                  >
+                    <div className="relative h-80 overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brown via-brown/60 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
+                      <div className="absolute inset-0 flex flex-col items-start justify-end p-6 transition-all duration-500">
+                        <div className="text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
+                          <h3 className="font-display text-2xl font-bold mb-2">
+                            {service.title}
+                          </h3>
+                          <p className="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            {service.description}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                )}
+              </InView>
             ))}
           </div>
 
@@ -448,7 +447,7 @@ transform hover:scale-[1.02]
             <Button
               asChild
               size="lg"
-              className="bg-primary hover:bg-primary-dark text-lg px-8"
+              className="bg-[#5A386D] hover:bg-[#62009b] text-lg px-8"
             >
               <Link to="/services">
                 View All Services
@@ -466,7 +465,7 @@ transform hover:scale-[1.02]
             <div className="inline-block mb-4">
               <SectionIcon />
             </div>
-            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-foreground">
+            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
               Collections
             </h2>
             <p className="font-body text-lg text-muted-foreground leading-relaxed">
@@ -476,32 +475,41 @@ transform hover:scale-[1.02]
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {/* 2. Update Collections Section Card Mapping */}
             {collections.map((item, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-lg animate-scale-in shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="relative h-96 overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brown/80 via-brown/30 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
-
-                  <div className="absolute inset-0 flex flex-col items-start justify-end p-6 transition-all duration-500">
-                    <div className="text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
-                      <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs mb-2">
-                        {item.type}
-                      </span>
-                      <h3 className="font-display text-2xl font-bold">
-                        {item.title}
-                      </h3>
+              <InView key={index} triggerOnce threshold={0.1} rootMargin="0px 0px -50px 0px">
+                {({ ref, inView }) => (
+                  <div
+                    ref={ref}
+                    className={`
+                      group relative overflow-hidden rounded-lg
+                      shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]
+                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
+                      ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} // Conditional animation styles
+                    `}
+                    style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
+                  >
+                    <div className="relative h-96 overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brown/80 via-brown/30 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+                      <div className="absolute inset-0 flex flex-col items-start justify-end p-6 transition-all duration-500">
+                        <div className="text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
+                          <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs mb-2">
+                            {item.type}
+                          </span>
+                          <h3 className="font-display text-2xl font-bold">
+                            {item.title}
+                          </h3>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                )}
+              </InView>
             ))}
           </div>
 
@@ -509,7 +517,7 @@ transform hover:scale-[1.02]
             <Button
               asChild
               size="lg"
-              className="bg-primary hover:bg-primary-dark text-lg px-8"
+              className="bg-[#5A386D] hover:bg-[#62009b] text-lg px-8"
             >
               <Link to="/collection">
                 Explore Collection
@@ -524,53 +532,63 @@ transform hover:scale-[1.02]
       <section className="py-24 bg-gradient-to-b from-secondary/30 to-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
-            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-foreground">
+            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
               What Our Customers Say
             </h2>
-            <p className="font-body text-lg text-muted-foreground leading-relaxed">
+            <p className="font-body text-lg text-[#7A4B7A] leading-relaxed">
               Real experiences from our valued clients who trust us with their
               precious textiles
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {/* 2. Update Testimonials Section Card Mapping */}
             {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="bg-card p-8 rounded-lg shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 animate-scale-in"
-                style={{ animationDelay: `${index * 0.15}s` }}
-              >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <svg
-                      key={i}
-                      className="w-5 h-5 text-primary fill-current"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="font-body text-muted-foreground italic mb-6 leading-relaxed">
-                  "{testimonial.review}"
-                </p>
-                <p className="font-display text-lg font-semibold text-foreground">
-                  - {testimonial.name}
-                </p>
-              </div>
+              <InView key={index} triggerOnce threshold={0.1} rootMargin="0px 0px -50px 0px">
+                {({ ref, inView }) => (
+                  <div
+                    ref={ref}
+                    className={`
+                      bg-card p-8 rounded-lg 
+                      shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]
+                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
+                      ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} // Conditional animation styles
+                    `}
+                    style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
+                  >
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <svg
+                          key={i}
+                          className="w-5 h-5 text-primary fill-current"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="font-body text-muted-foreground italic mb-6 leading-relaxed">
+                      "{testimonial.review}"
+                    </p>
+                    <p className="font-display text-lg font-semibold text-foreground">
+                      - {testimonial.name}
+                    </p>
+                  </div>
+                )}
+              </InView>
             ))}
           </div>
 
           <div className="text-center animate-fade-in">
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-secondary rounded-full">
               <svg
-                className="w-5 h-5 text-primary"
+                className="w-5 h-5 text-[#794299]"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
               </svg>
-              <span className="font-body text-muted-foreground">
+              <span className="font-body text-[#794299]">
                 Watch customer testimonial videos on our social media
               </span>
             </div>
@@ -579,7 +597,7 @@ transform hover:scale-[1.02]
       </section>
 
       {/* Appointment Section */}
-      <section className="py-24 bg-gradient-to-r from-primary via-primary-dark to-primary relative overflow-hidden">
+      <section className="py-24 bg-white from-primary via-primary-dark to-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -592,10 +610,10 @@ transform hover:scale-[1.02]
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-[#794299] mb-6">
                 Book Your Free Design Consultation
               </h2>
-              <p className="font-body text-lg text-white/90 mb-8 leading-relaxed">
+              <p className="font-body text-lg text-[#7A4B7A]/90 mb-8 leading-relaxed">
                 Come visit our beautiful showroom to see first hand our
                 selection of beautiful rugs and carpets. Let our master
                 craftsmen care for your precious textiles.
@@ -604,15 +622,15 @@ transform hover:scale-[1.02]
                 <Button
                   asChild
                   size="lg"
-                  className="bg-white hover:bg-white/90 text-primary text-lg px-8"
+                  className="bg-[#794299] hover:bg-[#62009b]/90 text-white text-lg px-8"
                 >
                   <Link to="/book-appointment">Book My Visit</Link>
                 </Button>
                 <Button
                   asChild
                   size="lg"
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8"
+
+                  className="bg-[#794299] hover:bg-[#62009b]/90 text-white text-lg px-8"
                 >
                   <Link to="/contact">Contact Us</Link>
                 </Button>

@@ -46,10 +46,10 @@ const About = () => {
         
         <div className="relative z-10 container mx-auto px-4 py-24">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-accent mb-6">
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
               Our Story
             </h1>
-            <p className="font-body text-xl text-accent/90 leading-relaxed">
+            <p className="font-body text-xl text-white/90 leading-relaxed">
               A legacy of craftsmanship, care, and dedication to preserving textile heritage.
             </p>
           </div>
@@ -68,7 +68,7 @@ const About = () => {
               />
             </div>
             <div className="animate-fade-in">
-              <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-[#794299]">
                 Where Tradition Meets Excellence
               </h2>
               <div className="space-y-4 font-body text-lg text-muted-foreground leading-relaxed">
@@ -93,7 +93,7 @@ const About = () => {
       <section className="py-24 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-[#794299]">
               Our Core Values
             </h2>
             <p className="font-body text-lg text-muted-foreground leading-relaxed">
@@ -113,7 +113,7 @@ const About = () => {
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-600/10 rounded-full mb-6">
                     <Icon className="w-8 h-8 text-purple-600" />
                   </div>
-                  <h3 className="font-display text-xl font-semibold mb-3 text-foreground">
+                  <h3 className="font-display text-xl font-semibold mb-3 text-[#794299]">
                     {value.title}
                   </h3>
                   <p className="font-body text-muted-foreground leading-relaxed">

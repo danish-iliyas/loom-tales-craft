@@ -23,7 +23,7 @@ const ServiceCard = ({ title, description, image, index }: ServiceCardProps) => 
         />
       </div>
       <div className="p-6">
-        <h3 className="font-display text-xl font-semibold mb-3 text-primary">
+        <h3 className="font-display text-xl font-semibold mb-3 text-[#794299]">
           {title}
         </h3>
         <p className="font-body text-muted-foreground leading-relaxed mb-4 text-sm">
@@ -31,7 +31,7 @@ const ServiceCard = ({ title, description, image, index }: ServiceCardProps) => 
         </p>
         <Link 
           to="/book-appointment" 
-          className="inline-flex items-center text-primary hover:text-primary-dark font-medium transition-colors text-sm"
+          className="inline-flex items-center text-[#794299] hover:text-[#62009b] font-medium transition-colors text-sm"
         >
           Book Now
           <ArrowRight className="w-4 h-4 ml-2" />
