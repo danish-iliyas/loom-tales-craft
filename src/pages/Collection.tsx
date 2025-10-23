@@ -100,7 +100,7 @@ const Collection = () => {
                 href="https://wa.me/+911234567890?text=Hi, I'm interested in your collection"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-3 bg-[#794299] hover:bg-[#62009b] text-primary-foreground font-body font-medium rounded-lg transition-colors"
+                className="inline-flex items-center justify-center px-8 py-3 bg-[#794299] hover:bg-[#62009b] text-primary-foreground font-body font-medium rounded-lg transition-all duration-200 ease-out transform hover:scale-[1.02]"
               >
                 Contact via WhatsApp
               </a>

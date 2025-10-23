@@ -142,7 +142,7 @@ const Contact = () => {
                   <label htmlFor="message" className="block font-body font-medium mb-2 text-[#794299]">Your Message *</label>
                   <Textarea id="message" name="message" required value={formData.message} onChange={handleChange} placeholder="Tell us how we can help..." rows={5} />
                 </div>
-                <Button type="submit" size="lg" className="w-full bg-[#794299] hover:bg-[#62009b] text-white">
+                <Button type="submit" size="lg" className="w-full bg-[#794299] hover:bg-[#62009b] text-white transition-all duration-200 ease-out transform hover:scale-[1.02]">
                   Send Message
                 </Button>
               </form>

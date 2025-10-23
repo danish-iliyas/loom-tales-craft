@@ -43,7 +43,7 @@ const Header = () => {
         isTransparent
           ? "bg-transparent"
           // ✅ CHANGED: Updated the background and border color for the scrolled state
-          : "bg-[#5A386D]/95 backdrop-blur-sm border-b border-white/20 shadow-lg"
+          : "bg-[#43305d]/95 backdrop-blur-sm border-b border-white/20 shadow-lg"
       }`}
     >
       <div className="container mx-auto px-4">

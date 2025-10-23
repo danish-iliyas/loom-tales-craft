@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle, MessageCircle, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -14,8 +14,7 @@ import collection1 from "@/assets/collection-1.jpg";
 import collection2 from "@/assets/collection-2.jpg";
 import collection3 from "@/assets/collection-3.jpg";
 // 1. Import InView
-import { InView } from 'react-intersection-observer';
-
+import { InView } from "react-intersection-observer";
 
 // This is the SVG you provided, turned into a reusable component
 const SectionIcon = () => (
@@ -27,13 +26,27 @@ const SectionIcon = () => (
   >
     <defs>
       {/* Gradients for the petals */}
-      <radialGradient id="frontPetalGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-        <stop offset="0%" style={{ stopColor: '#C39BD3' }} />
-        <stop offset="100%" style={{ stopColor: '#8E44AD' }} />
+      <radialGradient
+        id="frontPetalGradient"
+        cx="50%"
+        cy="50%"
+        r="50%"
+        fx="50%"
+        fy="50%"
+      >
+        <stop offset="0%" style={{ stopColor: "#C39BD3" }} />
+        <stop offset="100%" style={{ stopColor: "#8E44AD" }} />
       </radialGradient>
-      <radialGradient id="backPetalGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-        <stop offset="0%" style={{ stopColor: '#8E44AD' }} />
-        <stop offset="100%" style={{ stopColor: '#512E5F' }} />
+      <radialGradient
+        id="backPetalGradient"
+        cx="50%"
+        cy="50%"
+        r="50%"
+        fx="50%"
+        fy="50%"
+      >
+        <stop offset="0%" style={{ stopColor: "#8E44AD" }} />
+        <stop offset="100%" style={{ stopColor: "#512E5F" }} />
       </radialGradient>
 
       {/* Filter for a subtle drop shadow effect */}
@@ -55,7 +68,11 @@ const SectionIcon = () => (
 
     {/* Back petals with shadow */}
     {/* NOTE: The 'style' attribute is converted to a JSX style object */}
-    <g fill="url(#backPetalGradient)" transform="rotate(45 50 50)" style={{ filter: 'url(#dropShadow)' }}>
+    <g
+      fill="url(#backPetalGradient)"
+      transform="rotate(45 50 50)"
+      style={{ filter: "url(#dropShadow)" }}
+    >
       <use href="#petal" transform="scale(1.05)" />
       <use href="#petal" transform="scale(1.05) rotate(90 50 50)" />
       <use href="#petal" transform="scale(1.05) rotate(180 50 50)" />
@@ -72,7 +89,13 @@ const SectionIcon = () => (
 
     {/* Detailed center design */}
     <g>
-      <circle cx="50" cy="50" r="12" fill="white" style={{ filter: 'url(#dropShadow)' }} />
+      <circle
+        cx="50"
+        cy="50"
+        r="12"
+        fill="white"
+        style={{ filter: "url(#dropShadow)" }}
+      />
       <circle cx="50" cy="50" r="8" fill="#512E5F" />
       <circle cx="50" cy="50" r="3" fill="white" />
     </g>
@@ -328,10 +351,13 @@ const Index = () => {
               <SectionIcon />
             </div>
             <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
-             Carpet Care Services
+              Carpet Care Services
             </h2>
             <p className="font-body text-lg text-neutral-500 leading-relaxed">
-              Beautifully crafted and ethically sourced, our handmade area rugs bring warmth, style, and authenticity to any space. Expertly woven by skilled artisans, each rug tells a unique story of tradition and craftsmanship.
+              Beautifully crafted and ethically sourced, our handmade area rugs
+              bring warmth, style, and authenticity to any space. Expertly woven
+              by skilled artisans, each rug tells a unique story of tradition
+              and craftsmanship.
             </p>
           </div>
 
@@ -339,7 +365,12 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {/* 2. Update Carpet Care Services Card Mapping */}
             {carpetServices.map((service, index) => (
-              <InView key={index} triggerOnce threshold={0.1} rootMargin="0px 0px -50px 0px">
+              <InView
+                key={index}
+                triggerOnce
+                threshold={0.1}
+                rootMargin="0px 0px -50px 0px"
+              >
                 {({ ref, inView }) => (
                   <div
                     ref={ref}
@@ -354,7 +385,11 @@ const Index = () => {
                       hover:shadow-purple-600/60
                       hover:border-gray-600/40
                       transform hover:scale-[1.02]
-                      ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} // Conditional animation styles
+                      ${
+                        inView
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-12"
+                      } // Conditional animation styles
                     `}
                     style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
                   >
@@ -407,35 +442,55 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {/* 2. Update Shawl Care Services Card Mapping */}
             {shawlServices.map((service, index) => (
-              <InView key={index} triggerOnce threshold={0.1} rootMargin="0px 0px -50px 0px">
+              <InView
+                key={index}
+                triggerOnce
+                threshold={0.1}
+                rootMargin="0px 0px -50px 0px"
+              >
                 {({ ref, inView }) => (
                   <div
                     ref={ref}
                     className={`
-                      group relative overflow-hidden rounded cursor-pointer
-                      shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]
-                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
-                      ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} // Conditional animation styles
-                    `}
-                    style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
+           group relative overflow-hidden rounded-lg
+           bg-white // Card background
+           shadow-xl border border-gray-100 // Similar to the image
+           hover:shadow-2xl hover:shadow-purple-600/60 hover:border-gray-600/40 // Hover effects
+           transition-all duration-500 ease-out // Smooth transitions
+           transform hover:-translate-y-2 // Lift effect on hover
+           ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
+         `}
+                    style={{ transitionDelay: `${index * 100}ms` }}
                   >
-                    <div className="relative h-80 overflow-hidden">
+                    {/* Image container */}
+                    <div className="relative h-64 overflow-hidden rounded-t-lg">
+                      {" "}
+                      {/* Rounded top corners */}
                       <img
                         src={service.image}
                         alt={service.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-brown via-brown/60 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
-                      <div className="absolute inset-0 flex flex-col items-start justify-end p-6 transition-all duration-500">
-                        <div className="text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
-                          <h3 className="font-display text-2xl font-bold mb-2">
-                            {service.title}
-                          </h3>
-                          <p className="text-white/80 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            {service.description}
-                          </p>
-                        </div>
-                      </div>
+                    </div>
+                    {/* Text content below image */}
+                    <div className="p-6 text-center">
+                      <h3 className="font-display text-2xl font-semibold mb-3 text-[#794299]">
+                        {" "}
+                        {/* Purple title */}
+                        {service.title}
+                      </h3>
+                      <p className="font-body text-sm text-gray-600 leading-relaxed mb-6">
+                        {" "}
+                        {/* Description */}
+                        {service.description}
+                      </p>
+                      <Link
+                        to={service.linkTo} // Use the linkTo property
+                        className="inline-flex items-center text-[#794299] hover:text-[#5A386D] font-medium transition-colors duration-300 text-base group-hover:gap-1"
+                      >
+                        View Details
+                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                      </Link>
                     </div>
                   </div>
                 )}
@@ -447,7 +502,7 @@ const Index = () => {
             <Button
               asChild
               size="lg"
-              className="bg-[#5A386D] hover:bg-[#62009b] text-lg px-8"
+              className="bg-[#5A386D] hover:bg-[#62009b] text-lg px-8 mb-9 transition-all duration-200 ease-out transform hover:scale-[1.02]"
             >
               <Link to="/services">
                 View All Services
@@ -460,7 +515,7 @@ const Index = () => {
 
       {/* Collections Section */}
       <section className="py-24 bg-gradient-to-b from-background to-secondary/30">
-        <div className="container mx-auto px-2 sm:px-4">
+        <div className="container mx-auto px-2 sm:px-4 ">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
             <div className="inline-block mb-4">
               <SectionIcon />
@@ -477,34 +532,64 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {/* 2. Update Collections Section Card Mapping */}
             {collections.map((item, index) => (
-              <InView key={index} triggerOnce threshold={0.1} rootMargin="0px 0px -50px 0px">
+              <InView
+                key={index}
+                triggerOnce
+                threshold={0.1}
+                rootMargin="0px 0px -50px 0px"
+              >
                 {({ ref, inView }) => (
                   <div
                     ref={ref}
                     className={`
-                      group relative overflow-hidden rounded-lg
-                      shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]
-                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
-                      ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} // Conditional animation styles
-                    `}
+           group relative overflow-hidden rounded-lg cursor-pointer bg-card
+           shadow-soft hover:shadow-hover
+           transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
+           ${
+             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+           } // Conditional animation styles
+         `}
                     style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
                   >
                     <div className="relative h-96 overflow-hidden">
+                      {" "}
+                      {/* Adjusted height */}
                       <img
                         src={item.image}
                         alt={item.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-brown/80 via-brown/30 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
-                      <div className="absolute inset-0 flex flex-col items-start justify-end p-6 transition-all duration-500">
-                        <div className="text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
-                          <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs mb-2">
+                      {/* Darker gradient applied always for readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none" />
+                      {/* Text content absolutely positioned */}
+                      <div className="absolute bottom-0 left-0 p-5 text-white w-full transition-transform duration-500 group-hover:-translate-y-1">
+                        {/* Optional: Type Badge if needed */}
+                        {item.type && (
+                          <span className="inline-block px-3 py-1 bg-[#62009b]/80 backdrop-blur-sm rounded-full text-xs mb-2">
                             {item.type}
                           </span>
-                          <h3 className="font-display text-2xl font-bold">
-                            {item.title}
-                          </h3>
-                        </div>
+                        )}
+                        <h3 className="font-display text-2xl font-bold drop-shadow-md">
+                          {item.title}
+                        </h3>
+                        {/* Optional: Description if added */}
+                        {/* {item.description && (
+                 <p className="text-white/90 text-sm mt-1 drop-shadow-sm">
+                   {item.description}
+                 </p>
+               )} */}
+                        {/* Added WhatsApp link similar to CollectionCard */}
+                        <a
+                          href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                            `Hi, I'm interested in ${item.title}. Can you provide more details?`
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-sm group-hover:gap-1 mt-2 opacity-0 group-hover:opacity-100"
+                        >
+                          View Details
+                          <MessageCircle className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -517,7 +602,7 @@ const Index = () => {
             <Button
               asChild
               size="lg"
-              className="bg-[#5A386D] hover:bg-[#62009b] text-lg px-8"
+              className="bg-[#5A386D] hover:bg-[#62009b] text-lg px-8 transition-all duration-200 ease-out transform hover:scale-[1.02]"
             >
               <Link to="/collection">
                 Explore Collection
@@ -544,7 +629,12 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {/* 2. Update Testimonials Section Card Mapping */}
             {testimonials.map((testimonial, index) => (
-              <InView key={index} triggerOnce threshold={0.1} rootMargin="0px 0px -50px 0px">
+              <InView
+                key={index}
+                triggerOnce
+                threshold={0.1}
+                rootMargin="0px 0px -50px 0px"
+              >
                 {({ ref, inView }) => (
                   <div
                     ref={ref}
@@ -552,7 +642,11 @@ const Index = () => {
                       bg-card p-8 rounded-lg 
                       shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]
                       transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
-                      ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} // Conditional animation styles
+                      ${
+                        inView
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-12"
+                      } // Conditional animation styles
                     `}
                     style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
                   >
@@ -560,17 +654,17 @@ const Index = () => {
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <svg
                           key={i}
-                          className="w-5 h-5 text-primary fill-current"
+                          className="w-5 h-5 text-[#794299] fill-current"
                           viewBox="0 0 20 20"
                         >
                           <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                         </svg>
                       ))}
                     </div>
-                    <p className="font-body text-muted-foreground italic mb-6 leading-relaxed">
+                    <p className="font-body text-foreground italic mb-6 leading-relaxed">
                       "{testimonial.review}"
                     </p>
-                    <p className="font-display text-lg font-semibold text-foreground">
+                    <p className="font-display text-lg font-semibold text-[#8637b4]">
                       - {testimonial.name}
                     </p>
                   </div>
@@ -622,15 +716,14 @@ const Index = () => {
                 <Button
                   asChild
                   size="lg"
-                  className="bg-[#794299] hover:bg-[#62009b]/90 text-white text-lg px-8"
+                  className="bg-[#794299] hover:bg-[#62009b]/90 text-white text-lg px-8 transition-all duration-200 ease-out transform hover:scale-[1.02]"
                 >
                   <Link to="/book-appointment">Book My Visit</Link>
                 </Button>
                 <Button
                   asChild
                   size="lg"
-
-                  className="bg-[#794299] hover:bg-[#62009b]/90 text-white text-lg px-8"
+                  className="bg-[#794299] hover:bg-[#62009b]/90 text-white text-lg px-8 transition-all duration-200 ease-out transform hover:scale-[1.02]"
                 >
                   <Link to="/contact">Contact Us</Link>
                 </Button>

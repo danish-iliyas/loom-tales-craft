@@ -101,13 +101,13 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
             {values.map((value, index) => {
               const Icon = value.icon;
               return (
                 <div
                   key={index}
-                  className="p-8 bg-card rounded-lg shadow-soft text-center border border-black/5"
+                  className="p-8 bg-card rounded-lg shadow-soft text-center border border-black/5 transition-all duration-200 ease-out transform hover:scale-[1.02]"
                 >
                   {/* MODIFIED: Changed icon colors to purple */}
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-600/10 rounded-full mb-6">
@@ -116,7 +116,7 @@ const About = () => {
                   <h3 className="font-display text-xl font-semibold mb-3 text-[#794299]">
                     {value.title}
                   </h3>
-                  <p className="font-body text-muted-foreground leading-relaxed">
+                  <p className="font-body text-foreground leading-relaxed">
                     {value.description}
                   </p>
                 </div>

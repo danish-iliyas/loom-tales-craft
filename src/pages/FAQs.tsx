@@ -94,13 +94,13 @@ const FAQs = () => {
                   href="https://wa.me/+911234567890"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-8 py-3 bg-[#794299] hover:bg-[#62009b] text-white font-body font-medium rounded-lg transition-colors"
+                  className="inline-flex items-center justify-center px-8 py-3 bg-[#794299] hover:bg-[#62009b] text-white font-body font-medium rounded-lg transition-colors duration-200 ease-out transform hover:scale-[1.02]"
                 >
                   WhatsApp Us
                 </a>
                 <a
                   href="/contact"
-                  className="inline-flex items-center justify-center px-8 py-3 bg-card hover:bg-[#62009b]/80 hover:text-white font-body font-medium rounded-lg transition-colors"
+                  className="inline-flex items-center justify-center px-8 py-3 bg-card hover:bg-[#62009b]/80 hover:text-white font-body font-medium rounded-lg transition-colors duration-200 ease-out transform hover:scale-[1.02]"
                 >
                   Contact Form
                 </a>
