@@ -50,10 +50,10 @@ const FAQs = () => {
         
         <div className="relative z-10 container mx-auto px-4 py-24">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-accent mb-6">
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
               Frequently Asked Questions
             </h1>
-            <p className="font-body text-xl text-accent/90 leading-relaxed">
+            <p className="font-body text-xl text-white/90 leading-relaxed">
               Find answers to common questions about our services, processes, and carpet care best practices.
             </p>
           </div>
@@ -71,7 +71,7 @@ const FAQs = () => {
                   value={`item-${index}`}
                   className="bg-card rounded-lg shadow-soft px-6 border-0"
                 >
-                  <AccordionTrigger className="font-display text-lg text-left font-semibold text-foreground hover:text-primary py-6 hover:no-underline">
+                  <AccordionTrigger className="font-display text-lg text-left font-semibold text-foreground hover:text-[#794299] py-6 hover:no-underline">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="font-body text-muted-foreground leading-relaxed pb-6">
@@ -83,7 +83,7 @@ const FAQs = () => {
 
             {/* Still Have Questions */}
             <div className="mt-16 p-8 bg-secondary rounded-lg text-center">
-              <h2 className="font-display text-3xl font-bold mb-4 text-foreground">
+              <h2 className="font-display text-3xl font-bold mb-4 text-[#794299]">
                 Still Have Questions?
               </h2>
               <p className="font-body text-lg text-muted-foreground mb-6 leading-relaxed">
@@ -94,13 +94,13 @@ const FAQs = () => {
                   href="https://wa.me/+911234567890"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-8 py-3 bg-primary hover:bg-primary-dark text-primary-foreground font-body font-medium rounded-lg transition-colors"
+                  className="inline-flex items-center justify-center px-8 py-3 bg-[#794299] hover:bg-[#62009b] text-white font-body font-medium rounded-lg transition-colors duration-200 ease-out transform hover:scale-[1.02]"
                 >
                   WhatsApp Us
                 </a>
                 <a
                   href="/contact"
-                  className="inline-flex items-center justify-center px-8 py-3 bg-card hover:bg-card/80 text-foreground font-body font-medium rounded-lg transition-colors"
+                  className="inline-flex items-center justify-center px-8 py-3 bg-card hover:bg-[#62009b]/80 hover:text-white font-body font-medium rounded-lg transition-colors duration-200 ease-out transform hover:scale-[1.02]"
                 >
                   Contact Form
                 </a>

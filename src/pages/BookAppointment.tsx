@@ -52,10 +52,10 @@ const BookAppointment = () => {
         </div>
         <div className="relative z-10 container mx-auto px-4 py-24">
           <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-accent mb-6">
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
               Book an Appointment
             </h1>
-            <p className="font-body text-xl text-accent/90 leading-relaxed">
+            <p className="font-body text-xl text-white leading-relaxed">
               Schedule a consultation with our experts to discuss your carpet and shawl care needs.
             </p>
           </div>
@@ -70,28 +70,28 @@ const BookAppointment = () => {
               <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Personal Information */}
                 <div className="space-y-6">
-                  <h2 className="font-display text-2xl font-bold text-foreground">Personal Information</h2>
+                  <h2 className="font-display text-2xl font-bold text-[#62009b]">Personal Information</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block font-body font-medium mb-2 text-foreground">Full Name *</label>
+                      <label htmlFor="name" className="block font-body font-medium mb-2 text-[#794299]">Full Name *</label>
                       <Input id="name" name="name" type="text" required value={formData.name} onChange={handleChange} placeholder="John Doe" />
                     </div>
                     <div>
-                      <label htmlFor="phone" className="block font-body font-medium mb-2 text-foreground">Phone Number *</label>
+                      <label htmlFor="phone" className="block font-body font-medium mb-2 text-[#794299]">Phone Number *</label>
                       <Input id="phone" name="phone" type="tel" required value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" />
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="email" className="block font-body font-medium mb-2 text-foreground">Email Address *</label>
+                    <label htmlFor="email" className="block font-body font-medium mb-2 text-[#794299]">Email Address *</label>
                     <Input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} placeholder="john@example.com" />
                   </div>
                 </div>
 
                 {/* Service Selection */}
                 <div className="space-y-6 pt-8 border-t border-border">
-                  <h2 className="font-display text-2xl font-bold text-foreground">Service Details</h2>
+                  <h2 className="font-display text-2xl font-bold text-[#62009b]">Service Details</h2>
                   <div>
-                    <label htmlFor="service" className="block font-body font-medium mb-2 text-foreground">Select Service *</label>
+                    <label htmlFor="service" className="block font-body font-medium mb-2 text-[#794299]">Select Service *</label>
                     <Select value={formData.service} onValueChange={(value) => setFormData({ ...formData, service: value })} required>
                       <SelectTrigger><SelectValue placeholder="Choose a service" /></SelectTrigger>
                       {/* FIXED: Added position="item-aligned" to solve scrollbar issue */}
@@ -104,14 +104,14 @@ const BookAppointment = () => {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="date" className="block font-body font-medium mb-2 text-foreground">Preferred Date *</label>
+                      <label htmlFor="date" className="block font-body font-medium mb-2 text-[#794299]">Preferred Date *</label>
                       <div className="relative">
                         <Input id="date" name="date" type="date" required value={formData.date} onChange={handleChange} min={new Date().toISOString().split('T')[0]} />
                         <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
                       </div>
                     </div>
                     <div>
-                      <label htmlFor="time" className="block font-body font-medium mb-2 text-foreground">Preferred Time *</label>
+                      <label htmlFor="time" className="block font-body font-medium mb-2 text-[#794299]">Preferred Time *</label>
                       <Select value={formData.time} onValueChange={(value) => setFormData({ ...formData, time: value })} required>
                         <SelectTrigger><SelectValue placeholder="Choose a time slot" /></SelectTrigger>
                         {/* FIXED: Added position="item-aligned" to solve scrollbar issue */}
@@ -124,15 +124,15 @@ const BookAppointment = () => {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="details" className="block font-body font-medium mb-2 text-foreground">Additional Details</label>
+                    <label htmlFor="details" className="block font-body font-medium mb-2 text-[#794299]">Additional Details</label>
                     <Textarea id="details" name="details" value={formData.details} onChange={handleChange} placeholder="Tell us about your item, any specific concerns, or questions you have..." rows={5} />
                   </div>
                 </div>
 
-                <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary-dark text-white text-lg h-14">
+                <Button type="submit" size="lg" className="w-full bg-[#794299] hover:bg-[#62009b] text-white text-lg h-14 transition-all duration-200 ease-out transform hover:scale-[1.02]">
                   Schedule Appointment
                 </Button>
-                <p className="text-center font-body text-sm text-muted-foreground">
+                <p className="text-center font-body text-sm text-foreground">
                   We'll confirm your appointment via WhatsApp and email within business hours.
                 </p>
               </form>
