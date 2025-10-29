@@ -112,81 +112,75 @@ const Index = () => {
     "Trusted by Generations",
   ];
 
+  // --- MODIFIED: Added 'type' and 'linkTo' ---
   const carpetServices = [
     {
       title: "Professional Washing",
       description:
         "Gentle yet thorough cleaning methods that preserve the integrity and beauty of your precious carpets.",
       image: washingImg,
-    },
-    {
-      title: "Professional Washing",
-      description:
-        "Gentle yet thorough cleaning methods that preserve the integrity and beauty of your precious carpets.",
-      image: washingImg,
-    },
-    {
-      title: "Professional Washing",
-      description:
-        "Gentle yet thorough cleaning methods that preserve the integrity and beauty of your precious carpets.",
-      image: washingImg,
-    },
-    {
-      title: "Professional Washing",
-      description:
-        "Gentle yet thorough cleaning methods that preserve the integrity and beauty of your precious carpets.",
-      image: washingImg,
-    },
-    {
-      title: "Professional Washing",
-      description:
-        "Gentle yet thorough cleaning methods that preserve the integrity and beauty of your precious carpets.",
-      image: washingImg,
+      type: "Carpet",
+      linkTo: "/services/carpet-washing",
     },
     {
       title: "Expert Repairing",
       description:
         "Master craftsmen restore damaged areas with traditional techniques, maintaining authentic patterns.",
       image: repairImg,
+      type: "Carpet",
+      linkTo: "/services/carpet-repairing",
     },
     {
       title: "Complete Restoration",
       description:
         "Bringing vintage carpets back to their original glory with meticulous attention to detail.",
       image: restorationImg,
+      type: "Carpet",
+      linkTo: "/services/carpet-restoration",
     },
     {
       title: "Wall Hanging Care",
       description:
         "Specialized cleaning and maintenance for decorative wall hangings, preserving their elegance and charm.",
       image: cleaningImg,
+      type: "Carpet",
+      linkTo: "/services/wall-hanging-care",
     },
   ];
 
+  // --- MODIFIED: Added 'type' ---
   const shawlServices = [
     {
       title: "Delicate Shawl Washing",
       description:
         "Specialized hand-washing techniques for precious Pashmina and Kashmiri shawls using traditional methods.",
       image: washingImg,
+      type: "Shawl",
+      linkTo: "/services/shawl-washing",
     },
     {
       title: "Shawl Restoration",
       description:
         "Expert restoration of vintage shawls, repairing tears and reviving faded colors with authentic materials.",
       image: restorationImg,
+      type: "Shawl",
+      linkTo: "/services/shawl-restoration",
     },
     {
       title: "Premium Dry Cleaning",
       description:
         "Eco-friendly dry cleaning for sensitive shawl materials that require extra care and gentle handling.",
       image: cleaningImg,
+      type: "Shawl",
+      linkTo: "/services/shawl-cleaning",
     },
     {
       title: "Sell & Exchange",
       description:
         "Trade your old shawls for new ones or get the best value with our fair exchange program.",
       image: exchangeImg,
+      type: "Shawl",
+      linkTo: "/services/sell-exchange",
     },
   ];
 
@@ -237,7 +231,6 @@ const Index = () => {
             alt="Traditional carpet craftsmanship"
             className="w-full h-full object-cover"
           />
-          {/* MODIFIED: Gradient is now more transparent for a cleaner image */}
           <div className="absolute inset-0 bg-gradient-to-r from-brown/60 via-brown/40 to-transparent" />
         </div>
 
@@ -343,162 +336,185 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Carpet Care Services */}
-      <section className="pt-16 pb-0 bg-white">
-        <div className="container mx-auto px-2 sm:px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
-            <div className="inline-block mb-[4px]">
-              <SectionIcon />
-            </div>
-            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
-              Carpet Care Services
-            </h2>
-            <p className="font-body text-lg text-neutral-500 leading-relaxed">
-              Beautifully crafted and ethically sourced, our handmade area rugs
-              bring warmth, style, and authenticity to any space. Expertly woven
-              by skilled artisans, each rug tells a unique story of tradition
-              and craftsmanship.
-            </p>
-          </div>
-
-          {/* CARDS GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {/* 2. Update Carpet Care Services Card Mapping */}
-            {carpetServices.map((service, index) => (
-              <InView
-                key={index}
-                triggerOnce
-                threshold={0.1}
-                rootMargin="0px 0px -50px 0px"
-              >
-                {({ ref, inView }) => (
-                  <div
-                    ref={ref}
-                    className={`
-                      group relative overflow-hidden rounded-md
-                      bg-white
-                      border border-gray-200
-                      cursor-pointer
-                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
-                      shadow-lg
-                      hover:shadow-xl
-                      hover:shadow-purple-600/60
-                      hover:border-gray-600/40
-                      transform hover:scale-[1.02]
-                      ${
-                        inView
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-12"
-                      } // Conditional animation styles
-                    `}
-                    style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
-                  >
-                    {/* IMAGE CONTAINER */}
-                    <div className="relative h-72 overflow-hidden">
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter group-hover:sepia-0 sepia-50"
-                      />
-                    </div>
-                    {/* TEXT CONTENT */}
-                    <div className="p-5 text-center">
-                      <h3 className="font-display text-2xl font-semibold mb-2 text-[#723983]">
-                        {service.title}
-                      </h3>
-                      <p className="font-body text-sm text-neutral-600 leading-relaxed mb-4">
-                        {service.description}
-                      </p>
-                      <a
-                        href="#" // Assuming this should link somewhere, update href as needed
-                        className="inline-flex items-center text-[#5A386D] font-medium hover:text-[#5A386D] transition-colors text-base"
-                      >
-                        View All
-                      </a>
-                    </div>
+      {/* --- MODIFIED: Dual Care Services Section --- */}
+      <section className="py-24 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          {/* Single Container Wrapper with Shadow */}
+          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+            {/* Main 2-column partition grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-20 gap-y-16">
+              {/* --- CARPETS COLUMN (Left) --- */}
+              <div>
+                {/* Carpet Header */}
+                <div className="text-center max-w-xl mx-auto lg:mx-0 lg:max-w-none mb-12">
+                  <div className="inline-block mb-[4px]">
+                    <SectionIcon />
                   </div>
-                )}
-              </InView>
-            ))}
-          </div>
-        </div>
-      </section>
+                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-[#5A386D]">
+                    Carpet Care Services
+                  </h2>
+                  {/* Alignment Fix */}
+                  <p className="font-body text-lg text-neutral-500 leading-relaxed h-24">
+                    Beautifully crafted and ethically sourced, our handmade area
+                    rugs bring warmth, style, and authenticity to any space.
+                  </p>
+                </div>
 
-      {/* Shawl Care Services */}
-      <section className="pt-4 pb-0 bg-gradient-to-b from-background to-secondary/30">
-        <div className="container mx-auto px-2 sm:px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
-            <div className="inline-block mb-[4px]">
-              <SectionIcon />
-            </div>
-            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
-              Shawl Care Services
-            </h2>
-            <p className="font-body text-lg text-muted-foreground leading-relaxed">
-              Specialized care for your treasured Pashmina and Kashmiri shawls
-            </p>
-          </div>
+                {/* Carpet Services Grid (2x2) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  {carpetServices.map((service, index) => (
+                    <InView
+                      key={index}
+                      triggerOnce
+                      threshold={0.1}
+                      rootMargin="0px 0px -50px 0px"
+                    >
+                      {({ ref, inView }) => (
+                        // --- NEW CARD STYLE (from Collections) ---
+                        <div
+                          ref={ref}
+                          className={`
+                            group relative overflow-hidden cursor-pointer bg-card
+                            shadow-soft hover:shadow-hover
+                            transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
+                            ${
+                              inView
+                                ? "opacity-100 translate-y-0"
+                                : "opacity-0 translate-y-12"
+                            }
+                          `}
+                          style={{ transitionDelay: `${index * 100}ms` }}
+                        >
+                          {/* Using h-72 for a good card height in a 2x2 grid */}
+                          <div className="relative h-72 overflow-hidden">
+                            <img
+                              src={service.image}
+                              alt={service.title}
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none" />
+                            <div className="absolute bottom-0 left-0 p-5 text-white w-full transition-transform duration-500 group-hover:-translate-y-1">
+                              {/* Added Service Type Badge */}
+                              {service.type && (
+                                <span className="inline-block px-3 py-1 bg-[#62009b]/80 backdrop-blur-sm rounded-full text-xs mb-2">
+                                  {service.type}
+                                </span>
+                              )}
+                              {/* Using text-xl for title */}
+                              <h3 className="font-display text-xl font-bold drop-shadow-md">
+                                {service.title}
+                              </h3>
+                              {/* Updated Link */}
+                              <Link
+                                to={service.linkTo}
+                                className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-sm group-hover:gap-1 mt-2 opacity-0 group-hover:opacity-100"
+                              >
+                                View Details
+                                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                        // --- END NEW CARD STYLE ---
+                      )}
+                    </InView>
+                  ))}
+                </div>
+                {/* End carpet grid */}
+              </div>
+              {/* End carpet column */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {/* 2. Update Shawl Care Services Card Mapping */}
-            {shawlServices.map((service, index) => (
-              <InView
-                key={index}
-                triggerOnce
-                threshold={0.1}
-                rootMargin="0px 0px -50px 0px"
-              >
-                {({ ref, inView }) => (
-                  <div
-                    ref={ref}
-                    className={`
-           group relative overflow-hidden rounded-lg
-           bg-white // Card background
-           shadow-xl border border-gray-100 // Similar to the image
-           hover:shadow-2xl hover:shadow-purple-600/60 hover:border-gray-600/40 // Hover effects
-           transition-all duration-500 ease-out // Smooth transitions
-           transform hover:-translate-y-2 // Lift effect on hover
-           ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
-         `}
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
-                    {/* Image container */}
-                    <div className="relative h-64 overflow-hidden rounded-t-lg">
-                      {" "}
-                      {/* Rounded top corners */}
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                    </div>
-                    {/* Text content below image */}
-                    <div className="p-6 text-center">
-                      <h3 className="font-display text-2xl font-semibold mb-3 text-[#794299]">
-                        {" "}
-                        {/* Purple title */}
-                        {service.title}
-                      </h3>
-                      <p className="font-body text-sm text-gray-600 leading-relaxed mb-6">
-                        {" "}
-                        {/* Description */}
-                        {service.description}
-                      </p>
-                      <Link
-                        to={service.linkTo} // Use the linkTo property
-                        className="inline-flex items-center text-[#794299] hover:text-[#5A386D] font-medium transition-colors duration-300 text-base group-hover:gap-1"
-                      >
-                        View Details
-                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                      </Link>
-                    </div>
+              {/* --- SHAWLS COLUMN (Right) --- */}
+              <div>
+                {/* Shawl Header */}
+                <div className="text-center max-w-xl mx-auto lg:mx-0 lg:max-w-none mb-12">
+                  <div className="inline-block mb-[4px]">
+                    <SectionIcon />
                   </div>
-                )}
-              </InView>
-            ))}
-          </div>
+                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-[#5A386D]">
+                    Shawl Care Services
+                  </h2>
+                  {/* Alignment Fix */}
+                  <p className="font-body text-lg text-neutral-500 leading-relaxed h-24">
+                    Specialized care for your treasured Pashmina and Kashmiri
+                    shawls.
+                  </p>
+                </div>
 
-          <div className="text-center animate-fade-in">
+                {/* Shawl Services Grid (2x2) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  {shawlServices.map((service, index) => (
+                    <InView
+                      key={index}
+                      triggerOnce
+                      threshold={0.1}
+                      rootMargin="0px 0px -50px 0px"
+                    >
+                      {({ ref, inView }) => (
+                        // --- NEW CARD STYLE (from Collections) ---
+                        <div
+                          ref={ref}
+                          className={`
+                            group relative overflow-hidden   cursor-pointer bg-card
+                            shadow-soft hover:shadow-hover
+                            transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
+                            ${
+                              inView
+                                ? "opacity-100 translate-y-0"
+                                : "opacity-0 translate-y-12"
+                            }
+                          `}
+                          style={{
+                            transitionDelay: `${
+                              (carpetServices.length + index) * 100
+                            }ms`,
+                          }}
+                        >
+                          {/* Using h-72 for a good card height in a 2x2 grid */}
+                          <div className="relative h-72 overflow-hidden">
+                            <img
+                              src={service.image}
+                              alt={service.title}
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none" />
+                            <div className="absolute bottom-0 left-0 p-5 text-white w-full transition-transform duration-500 group-hover:-translate-y-1">
+                              {/* Added Service Type Badge */}
+                              {service.type && (
+                                <span className="inline-block px-3 py-1 bg-[#62009b]/80 backdrop-blur-sm rounded-full text-xs mb-2">
+                                  {service.type}
+                                </span>
+                              )}
+                              {/* Using text-xl for title */}
+                              <h3 className="font-display text-xl font-bold drop-shadow-md">
+                                {service.title}
+                              </h3>
+                              {/* Updated Link */}
+                              <Link
+                                to={service.linkTo}
+                                className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-sm group-hover:gap-1 mt-2 opacity-0 group-hover:opacity-100"
+                              >
+                                View Details
+                                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                        // --- END NEW CARD STYLE ---
+                      )}
+                    </InView>
+                  ))}
+                </div>
+                {/* End shawl grid */}
+              </div>
+              {/* End shawl column */}
+            </div>
+            {/* End 2-column grid */}
+          </div>
+          {/* End single container wrapper */}
+
+          {/* View All Button (Centered) */}
+          <div className="text-center mt-20 animate-fade-in">
             <Button
               asChild
               size="lg"
@@ -511,7 +527,9 @@ const Index = () => {
             </Button>
           </div>
         </div>
+        {/* End container */}
       </section>
+      {/* --- END: Dual Care Services Section --- */}
 
       {/* Collections Section */}
       <section className="py-24 bg-gradient-to-b from-background to-secondary/30">
@@ -542,13 +560,13 @@ const Index = () => {
                   <div
                     ref={ref}
                     className={`
-           group relative overflow-hidden rounded-lg cursor-pointer bg-card
-           shadow-soft hover:shadow-hover
-           transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
-           ${
-             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-           } // Conditional animation styles
-         `}
+               group relative overflow-hidden rounded-lg cursor-pointer bg-card
+               shadow-soft hover:shadow-hover
+               transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
+               ${
+                 inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+               } // Conditional animation styles
+              `}
                     style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
                   >
                     <div className="relative h-96 overflow-hidden">
@@ -572,12 +590,6 @@ const Index = () => {
                         <h3 className="font-display text-2xl font-bold drop-shadow-md">
                           {item.title}
                         </h3>
-                        {/* Optional: Description if added */}
-                        {/* {item.description && (
-                 <p className="text-white/90 text-sm mt-1 drop-shadow-sm">
-                   {item.description}
-                 </p>
-               )} */}
                         {/* Added WhatsApp link similar to CollectionCard */}
                         <a
                           href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
@@ -639,15 +651,15 @@ const Index = () => {
                   <div
                     ref={ref}
                     className={`
-                      bg-card p-8 rounded-lg 
-                      shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]
-                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
-                      ${
-                        inView
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-12"
-                      } // Conditional animation styles
-                    `}
+                       bg-card p-8 rounded-lg 
+                       shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]
+                       transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
+                       ${
+                         inView
+                           ? "opacity-100 translate-y-0"
+                           : "opacity-0 translate-y-12"
+                       } // Conditional animation styles
+                      `}
                     style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
                   >
                     <div className="flex gap-1 mb-4">
