@@ -342,7 +342,7 @@ const Index = () => {
       </section> */}
 
      {/* --- ✅ MODIFIED: Dual Care Services Section --- */}
- {/* --- ✅ MODIFIED: Dual Care Services Section --- */}
+{/* --- ✅ MODIFIED: Dual Care Services Section --- */}
       <section className="py-24 bg-secondary/30">
         <div className="container mx-auto px-4">
           
@@ -363,13 +363,38 @@ const Index = () => {
                 Carpet
               </h3>
               
-              {/* ✅ CHANGED: Carpet Main Image (rounded-2xl) */}
-              <div className="relative h-96 w-full overflow-hidden rounded-2xl shadow-xl mb-12 animate-fade-in">
+              {/* ✅ UPDATED: Carpet Main Image (now a full card) */}
+              <div className="group relative h-96 w-full overflow-hidden rounded-2xl shadow-lg cursor-pointer mb-12 animate-fade-in">
+                {/* Image as background */}
                 <img
-                  src={repairImg} // You can change this to your main carpet image
+                  src={repairImg} // Your main carpet image
                   alt="Carpet Care"
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                 />
+                
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                {/* Content (Badge, Title, Link) */}
+                <div className="relative z-10 flex flex-col justify-between h-full p-6">
+                  <div>
+                    <span className="inline-block bg-[#794299] text-white px-4 py-1.5 rounded-full font-serif text-sm font-medium">
+                      Carpet
+                    </span>
+                  </div>
+                  <div className="transition-transform duration-500 group-hover:-translate-y-1">
+                    <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-md leading-tight">
+                      Professional Washing
+                    </h3>
+                    <Link
+                      to="/services/carpet-washing" // Link for the main carpet service
+                      className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-base group-hover:gap-1 mt-0 opacity-0 group-hover:opacity-100"
+                    >
+                      View Details
+                      <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Link>
+                  </div>
+                </div>
               </div>
               
               {/* Carpet Services Grid (2x2) */}
@@ -382,7 +407,6 @@ const Index = () => {
                     rootMargin="0px 0px -50px 0px"
                   >
                     {({ ref, inView }) => (
-                      // --- ✅ CHANGED: Card style (rounded-2xl) ---
                       <div
                         ref={ref}
                         className={`
@@ -434,7 +458,6 @@ const Index = () => {
                           </div>
                         </div>
                       </div>
-                      // --- END NEW CARD STYLE ---
                     )}
                   </InView>
                 ))}
@@ -448,13 +471,38 @@ const Index = () => {
                 Shawl
               </h3>
               
-              {/* ✅ CHANGED: Shawl Main Image (rounded-2xl) */}
-              <div className="relative h-96 w-full overflow-hidden rounded-2xl shadow-xl mb-12 animate-fade-in">
+              {/* ✅ UPDATED: Shawl Main Image (now a full card) */}
+              <div className="group relative h-96 w-full overflow-hidden rounded-2xl shadow-lg cursor-pointer mb-12 animate-fade-in">
+                {/* Image as background */}
                 <img
-                  src={exchangeImg} // You can change this to your main shawl image
+                  src={exchangeImg} // Your main shawl image
                   alt="Shawl Care"
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                 />
+
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                {/* Content (Badge, Title, Link) */}
+                <div className="relative z-10 flex flex-col justify-between h-full p-6">
+                  <div>
+                    <span className="inline-block bg-[#794299] text-white px-4 py-1.5 rounded-full font-serif text-sm font-medium">
+                      Shawl
+                    </span>
+                  </div>
+                  <div className="transition-transform duration-500 group-hover:-translate-y-1">
+                    <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-md leading-tight">
+                      Expert Repair
+                    </h3>
+                    <Link
+                      to="/services/shawl-repair" // Link for the main shawl service
+                      className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-base group-hover:gap-1 mt-0 opacity-0 group-hover:opacity-100"
+                    >
+                      View Details
+                      <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Link>
+                  </div>
+                </div>
               </div>
 
               {/* Shawl Services Grid (2x2) */}
@@ -467,7 +515,6 @@ const Index = () => {
                     rootMargin="0px 0px -50px 0px"
                   >
                     {({ ref, inView }) => (
-                      // --- ✅ CHANGED: Card style (rounded-2xl) ---
                       <div
                         ref={ref}
                         className={`
@@ -523,7 +570,6 @@ const Index = () => {
                           </div>
                         </div>
                       </div>
-                      // --- END NEW CARD STYLE ---
                     )}
                   </InView>
                 ))}
