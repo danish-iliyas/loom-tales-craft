@@ -1,20 +1,23 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle, MessageCircle, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Header from "@/components/Header";
+import Header from "@/components/Header"; // This will now import your new header
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
-import heroImage from "@/assets/hero-carpet.jpg";
+import heroImage from "@/assets/hero-carpet.jpg"; // Slide 1
 import washingImg from "@/assets/service-washing.jpg";
 import repairImg from "@/assets/service-repair.jpg";
 import restorationImg from "@/assets/service-restoration.jpg";
 import exchangeImg from "@/assets/service-exchange.jpg";
 import cleaningImg from "@/assets/service-cleaning.jpg";
-import collection1 from "@/assets/collection-1.jpg";
-import collection2 from "@/assets/collection-2.jpg";
+import collection1 from "@/assets/collection-1.jpg"; // Slide 2
+import collection2 from "@/assets/collection-2.jpg"; // Slide 3
 import collection3 from "@/assets/collection-3.jpg";
-// 1. Import InView
 import { InView } from "react-intersection-observer";
+
+// ✅ 1. Import Embla Carousel hooks
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 // This is the SVG you provided, turned into a reusable component
 const SectionIcon = () => (
@@ -105,12 +108,44 @@ const SectionIcon = () => (
 const Index = () => {
   const whatsappNumber = "+911234567890";
 
-  const features = [
-    "Expert Artisan Care",
-    "Heritage Preservation",
-    "Premium Quality Service",
-    "Trusted by Generations",
+  // ✅ 2. Setup Embla Carousel
+  // This will autoplay, loop, and not stop when you hover/click it
+  const [emblaRef] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: false }),
+  ]);
+
+  // ✅ 3. Define slides (using your imported images + a video example)
+  const carouselSlides = [
+    {
+      type: "image",
+      src: heroImage, // From your imports
+      alt: "Handcrafted masterpieces",
+    },
+    {
+      type: "image",
+      src: collection1, // From your imports
+      alt: "Traditional Persian Carpets",
+    },
+    {
+      type: "image",
+      src: collection2, // From your imports
+      alt: "Vintage Kashmiri Shawls",
+    },
+    // As you requested, here is how you would add a video:
+    {
+      type: "video",
+      // You must provide your own video file URL here
+      src: "https://videos.pexels.com/video-files/3840810/3840810-hd_1920_1080_25fps.mp4",
+      alt: "Carpet weaving process",
+    },
   ];
+
+  // const features = [
+  //   "Expert Artisan Care",
+  //   "Heritage Preservation",
+  //   "Premium Quality Service",
+  //   "Trusted by Generations",
+  // ];
 
   // --- MODIFIED: Added 'type' and 'linkTo' ---
   const carpetServices = [
@@ -220,104 +255,74 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      <Header /> {/* ✅ This now renders your new header */}
       <WhatsAppFloat />
 
-      {/* Hero Section */}
-      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt="Traditional carpet craftsmanship"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-brown/60 via-brown/40 to-transparent" />
+      {/* --- ✅ REPLACED: Hero Section (now a Carousel) --- */}
+      {/* --- ✅ REPLACED: Hero Section (Carousel size decreased) --- */}
+      <section className="relative h-[75vh] min-h-[550px] flex items-center overflow-hidden">
+        {/* Embla Carousel Viewport */}
+        <div className="absolute inset-0" ref={emblaRef}>
+          <div className="flex h-full">
+            {/* Map through carousel slides */}
+            {carouselSlides.map((slide, index) => (
+              <div
+                className="relative flex-[0_0_100%] h-full"
+                key={index}
+              >
+                {slide.type === "image" ? (
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <video
+                    src={slide.src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                )}
+                {/* Dark overlay for text readability on all slides */}
+                <div className="absolute inset-0 bg-black/40" />
+              </div>
+            ))}
+          </div>
         </div>
 
+        {/* Static Content Overlay (Text + Button) - as seen in screenshot */}
         <div className="relative z-10 container mx-auto px-4">
-          <div className="max-w-2xl animate-fade-in">
-            <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-5 h-5 text-accent" />
-              <span className="font-body text-accent uppercase tracking-wider text-sm">
-                Premium Care Services
-              </span>
-            </div>
-            <h1 className="font-display text-white text-5xl md:text-6xl lg:text-7xl font-bold text-accent mb-6 leading-tight">
-              Where Art Meets Care
+          <div className="max-w-xl animate-fade-in">
+            {/* Text from the screenshot */}
+            <h1 className="font-serif text-white text-5xl md:text-6xl lg:text-5xl font-normal mb-8 leading-tight">
+              Handcrafted masterpieces from the world's finest looms
             </h1>
-            <p className="font-body text-lg md:text-xl text-accent/100 mb-8 leading-relaxed">
-              Expert carpet and shawl care services that honor tradition while
-              embracing excellence. We preserve the stories woven into every
-              thread.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                asChild
-                size="lg"
-                className="
-    relative overflow-hidden
-    bg-primary text-primary-foreground
-    text-lg font-serif tracking-wide
-    h-14 px-10 rounded-2xl
-    shadow-[inset_0_0_8px_rgba(255,255,255,0.15),0_3px_10px_rgba(0,0,0,0.35)]
-    transition-all duration-500 ease-out
-    hover:bg-primary-dark hover:shadow-[0_5px_20px_rgba(0,0,0,0.5)]
-    before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-700
-  "
-              >
-                <Link
-                  to="/book-appointment"
-                  className="flex items-center justify-center gap-3 z-10 relative"
-                >
-                  Book Appointment
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-              </Button>
 
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="
-    relative overflow-hidden
-    font-serif tracking-wider text-[1.15rem]
-    border-[1.8px] rounded-2xl
-    border-[#c9a36a]
-    text-[#c9a36a]
-    bg-gradient-to-b from-[#1a1a1a] to-[#2a1f17]
-    transition-all duration-500 ease-out
-    hover:text-white
-    hover:bg-[#c9a36a]
-    shadow-[inset_0_0_10px_rgba(255,255,255,0.1),0_2px_8px_rgba(0,0,0,0.4)]
-    hover:shadow-[0_4px_20px_rgba(201,163,106,0.5)]
-    h-14 px-10
-    before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-[#fff5e1]/20 before:to-transparent before:opacity-0 before:transition-opacity before:duration-500 hover:before:opacity-100
-  "
-              >
-                <a
-                  href={`https://wa.me/${whatsappNumber}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-3 z-10 relative"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    className="w-5 h-5"
-                  >
-                    <path d="M12.04 2C6.49 2 2 6.27 2 11.5c0 2.01.75 3.87 2 5.36L2 22l5.41-1.72A10.2 10.2 0 0 0 12.04 21C17.6 21 22 16.73 22 11.5S17.6 2 12.04 2Zm0 17.5c-1.65 0-3.18-.51-4.46-1.37l-.32-.21-3.22.99.97-3.07-.21-.33A7.22 7.22 0 0 1 4.5 11.5c0-4 3.38-7.25 7.54-7.25s7.54 3.25 7.54 7.25-3.38 7.25-7.54 7.25Z" />
-                  </svg>
-                  WhatsApp&nbsp;Us
-                </a>
-              </Button>
-            </div>
+            {/* Button from the screenshot */}
+            <Button
+              asChild
+              size="lg"
+              // Simple white button styling from screenshot
+              className="
+                bg-white text-gray-900 font-serif text-lg h-14 px-10 rounded-none
+                hover:bg-gray-200 transition-colors
+              "
+            >
+              <Link to="/shop">Shop Now</Link>
+            </Button>
           </div>
         </div>
       </section>
+      {/* --- END: Hero Section --- */}
+      {/* --- END: Hero Section --- */}
 
       {/* Features Bar */}
-      <section className="py-8 bg-secondary border-y border-border">
+      {/* <section className="py-8 bg-secondary border-y border-border">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
@@ -334,186 +339,200 @@ const Index = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* --- MODIFIED: Dual Care Services Section --- */}
+     {/* --- ✅ MODIFIED: Dual Care Services Section --- */}
+ {/* --- ✅ MODIFIED: Dual Care Services Section --- */}
       <section className="py-24 bg-secondary/30">
         <div className="container mx-auto px-4">
-          {/* Single Container Wrapper with Shadow */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-            {/* Main 2-column partition grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-20 gap-y-16">
-              {/* --- CARPETS COLUMN (Left) --- */}
-              <div>
-                {/* Carpet Header */}
-                <div className="text-center max-w-xl mx-auto lg:mx-0 lg:max-w-none mb-12">
-                  <div className="inline-block mb-[4px]">
-                    <SectionIcon />
-                  </div>
-                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-[#5A386D]">
-                    Carpet Care Services
-                  </h2>
-                  {/* Alignment Fix */}
-                  <p className="font-body text-lg text-neutral-500 leading-relaxed h-24">
-                    Beautifully crafted and ethically sourced, our handmade area
-                    rugs bring warmth, style, and authenticity to any space.
-                  </p>
-                </div>
-
-                {/* Carpet Services Grid (2x2) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                  {carpetServices.map((service, index) => (
-                    <InView
-                      key={index}
-                      triggerOnce
-                      threshold={0.1}
-                      rootMargin="0px 0px -50px 0px"
-                    >
-                      {({ ref, inView }) => (
-                        // --- NEW CARD STYLE (from Collections) ---
-                        <div
-                          ref={ref}
-                          className={`
-                            group relative overflow-hidden cursor-pointer bg-card
-                            shadow-soft hover:shadow-hover
-                            transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
-                            ${
-                              inView
-                                ? "opacity-100 translate-y-0"
-                                : "opacity-0 translate-y-12"
-                            }
-                          `}
-                          style={{ transitionDelay: `${index * 100}ms` }}
-                        >
-                          {/* Using h-72 for a good card height in a 2x2 grid */}
-                          <div className="relative h-72 overflow-hidden">
-                            <img
-                              src={service.image}
-                              alt={service.title}
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none" />
-                            <div className="absolute bottom-0 left-0 p-5 text-white w-full transition-transform duration-500 group-hover:-translate-y-1">
-                              {/* Added Service Type Badge */}
-                              {service.type && (
-                                <span className="inline-block px-3 py-1 bg-[#62009b]/80 backdrop-blur-sm rounded-full text-xs mb-2">
-                                  {service.type}
-                                </span>
-                              )}
-                              {/* Using text-xl for title */}
-                              <h3 className="font-display text-xl font-bold drop-shadow-md">
-                                {service.title}
-                              </h3>
-                              {/* Updated Link */}
-                              <Link
-                                to={service.linkTo}
-                                className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-sm group-hover:gap-1 mt-2 opacity-0 group-hover:opacity-100"
-                              >
-                                View Details
-                                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                        // --- END NEW CARD STYLE ---
-                      )}
-                    </InView>
-                  ))}
-                </div>
-                {/* End carpet grid */}
-              </div>
-              {/* End carpet column */}
-
-              {/* --- SHAWLS COLUMN (Right) --- */}
-              <div>
-                {/* Shawl Header */}
-                <div className="text-center max-w-xl mx-auto lg:mx-0 lg:max-w-none mb-12">
-                  <div className="inline-block mb-[4px]">
-                    <SectionIcon />
-                  </div>
-                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-[#5A386D]">
-                    Shawl Care Services
-                  </h2>
-                  {/* Alignment Fix */}
-                  <p className="font-body text-lg text-neutral-500 leading-relaxed h-24">
-                    Specialized care for your treasured Pashmina and Kashmiri
-                    shawls.
-                  </p>
-                </div>
-
-                {/* Shawl Services Grid (2x2) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                  {shawlServices.map((service, index) => (
-                    <InView
-                      key={index}
-                      triggerOnce
-                      threshold={0.1}
-                      rootMargin="0px 0px -50px 0px"
-                    >
-                      {({ ref, inView }) => (
-                        // --- NEW CARD STYLE (from Collections) ---
-                        <div
-                          ref={ref}
-                          className={`
-                            group relative overflow-hidden   cursor-pointer bg-card
-                            shadow-soft hover:shadow-hover
-                            transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
-                            ${
-                              inView
-                                ? "opacity-100 translate-y-0"
-                                : "opacity-0 translate-y-12"
-                            }
-                          `}
-                          style={{
-                            transitionDelay: `${
-                              (carpetServices.length + index) * 100
-                            }ms`,
-                          }}
-                        >
-                          {/* Using h-72 for a good card height in a 2x2 grid */}
-                          <div className="relative h-72 overflow-hidden">
-                            <img
-                              src={service.image}
-                              alt={service.title}
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none" />
-                            <div className="absolute bottom-0 left-0 p-5 text-white w-full transition-transform duration-500 group-hover:-translate-y-1">
-                              {/* Added Service Type Badge */}
-                              {service.type && (
-                                <span className="inline-block px-3 py-1 bg-[#62009b]/80 backdrop-blur-sm rounded-full text-xs mb-2">
-                                  {service.type}
-                                </span>
-                              )}
-                              {/* Using text-xl for title */}
-                              <h3 className="font-display text-xl font-bold drop-shadow-md">
-                                {service.title}
-                              </h3>
-                              {/* Updated Link */}
-                              <Link
-                                to={service.linkTo}
-                                className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-sm group-hover:gap-1 mt-2 opacity-0 group-hover:opacity-100"
-                              >
-                                View Details
-                                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                        // --- END NEW CARD STYLE ---
-                      )}
-                    </InView>
-                  ))}
-                </div>
-                {/* End shawl grid */}
-              </div>
-              {/* End shawl column */}
-            </div>
-            {/* End 2-column grid */}
+          
+          {/* 1. Main "SERVICES" Title */}
+          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+            <h2 className="font-serif text-5xl md:text-6xl font-bold mb-6 text-gray-800 uppercase tracking-wider">
+              Services
+            </h2>
           </div>
-          {/* End single container wrapper */}
 
-          {/* View All Button (Centered) */}
+          {/* 2. Main 2-column grid (Carpet vs Shawl) */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-12 gap-y-16">
+            
+            {/* --- 3. CARPETS COLUMN (Left) --- */}
+            <div>
+              {/* Carpet Column Title */}
+              <h3 className="font-serif text-3xl text-center font-medium text-gray-700 uppercase tracking-widest mb-8">
+                Carpet
+              </h3>
+              
+              {/* ✅ CHANGED: Carpet Main Image (rounded-2xl) */}
+              <div className="relative h-96 w-full overflow-hidden rounded-2xl shadow-xl mb-12 animate-fade-in">
+                <img
+                  src={repairImg} // You can change this to your main carpet image
+                  alt="Carpet Care"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              {/* Carpet Services Grid (2x2) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                {carpetServices.map((service, index) => (
+                  <InView
+                    key={index}
+                    triggerOnce
+                    threshold={0.1}
+                    rootMargin="0px 0px -50px 0px"
+                  >
+                    {({ ref, inView }) => (
+                      // --- ✅ CHANGED: Card style (rounded-2xl) ---
+                      <div
+                        ref={ref}
+                        className={`
+                          group relative h-80 w-full overflow-hidden rounded-2xl shadow-lg cursor-pointer
+                          transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
+                          ${
+                            inView
+                              ? "opacity-100 translate-y-0"
+                              : "opacity-0 translate-y-12"
+                          }
+                        `}
+                        style={{ transitionDelay: `${index * 100}ms` }}
+                      >
+                        {/* 1. Image (as background) */}
+                        <img
+                          src={service.image}
+                          alt={service.title}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                        />
+                        
+                        {/* 2. Dark Overlay (for text readability) */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                        {/* 3. Content (relative to position elements) */}
+                        <div className="relative z-10 flex flex-col justify-between h-full p-6">
+                          {/* Badge (Top-left) - Styled like screenshot */}
+                          {service.type && (
+                            <div>
+                              <span className="inline-block bg-[#794299] text-white px-4 py-1.5 rounded-full font-serif text-sm font-medium">
+                                {service.type}
+                              </span>
+                            </div>
+                          )}
+
+                          {/* Title & Link (Bottom-left) - Styled like screenshot */}
+                          <div className="transition-transform duration-500 group-hover:-translate-y-1">
+                            <h3 className="font-serif text-3xl font-bold text-white mb-1 drop-shadow-md">
+                              {service.title}
+                            </h3>
+                            
+                            {/* Kept your original "View Details" link, appears on hover */}
+                            <Link
+                              to={service.linkTo}
+                              className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-sm group-hover:gap-1 mt-0 opacity-0 group-hover:opacity-100"
+                            >
+                              View Details
+                              <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                      // --- END NEW CARD STYLE ---
+                    )}
+                  </InView>
+                ))}
+              </div>
+            </div> {/* End carpet column */}
+
+            {/* --- 4. SHAWLS COLUMN (Right) --- */}
+            <div>
+              {/* Shawl Column Title */}
+              <h3 className="font-serif text-3xl text-center font-medium text-gray-700 uppercase tracking-widest mb-8">
+                Shawl
+              </h3>
+              
+              {/* ✅ CHANGED: Shawl Main Image (rounded-2xl) */}
+              <div className="relative h-96 w-full overflow-hidden rounded-2xl shadow-xl mb-12 animate-fade-in">
+                <img
+                  src={exchangeImg} // You can change this to your main shawl image
+                  alt="Shawl Care"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Shawl Services Grid (2x2) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                {shawlServices.map((service, index) => (
+                  <InView
+                    key={index}
+                    triggerOnce
+                    threshold={0.1}
+                    rootMargin="0px 0px -50px 0px"
+                  >
+                    {({ ref, inView }) => (
+                      // --- ✅ CHANGED: Card style (rounded-2xl) ---
+                      <div
+                        ref={ref}
+                        className={`
+                          group relative h-80 w-full overflow-hidden rounded-2xl shadow-lg cursor-pointer
+                          transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
+                          ${
+                            inView
+                              ? "opacity-100 translate-y-0"
+                              : "opacity-0 translate-y-12"
+                          }
+                        `}
+                        style={{
+                          transitionDelay: `${
+                            (carpetServices.length + index) * 100
+                          }ms`,
+                        }}
+                      >
+                        {/* 1. Image (as background) */}
+                        <img
+                          src={service.image}
+                          alt={service.title}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                        />
+                        
+                        {/* 2. Dark Overlay (for text readability) */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                        {/* 3. Content (relative to position elements) */}
+                        <div className="relative z-10 flex flex-col justify-between h-full p-6">
+                          {/* Badge (Top-left) - Styled like screenshot */}
+                          {service.type && (
+                            <div>
+                              <span className="inline-block bg-[#794299] text-white px-4 py-1.5 rounded-full font-serif text-sm font-medium">
+                                {service.type}
+                              </span>
+                            </div>
+                          )}
+
+                          {/* Title & Link (Bottom-left) - Styled like screenshot */}
+                          <div className="transition-transform duration-500 group-hover:-translate-y-1">
+                            <h3 className="font-serif text-3xl font-bold text-white mb-1 drop-shadow-md">
+                              {service.title}
+                            </h3>
+                            
+                            {/* Kept your original "View Details" link, appears on hover */}
+                            <Link
+                              to={service.linkTo}
+                              className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-sm group-hover:gap-1 mt-0 opacity-0 group-hover:opacity-100"
+                            >
+                              View Details
+                              <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                      // --- END NEW CARD STYLE ---
+                    )}
+                  </InView>
+                ))}
+              </div>
+            </div> {/* End shawl column */}
+            
+          </div> {/* End 2-column grid */}
+
+          {/* 5. "View All" Button */}
           <div className="text-center mt-20 animate-fade-in">
             <Button
               asChild
@@ -526,9 +545,9 @@ const Index = () => {
               </Link>
             </Button>
           </div>
-        </div>
-        {/* End container */}
+        </div> {/* End container */}
       </section>
+      {/* --- END: Dual Care Services Section --- */}
       {/* --- END: Dual Care Services Section --- */}
 
       {/* Collections Section */}
@@ -560,13 +579,13 @@ const Index = () => {
                   <div
                     ref={ref}
                     className={`
-               group relative overflow-hidden rounded-lg cursor-pointer bg-card
-               shadow-soft hover:shadow-hover
-               transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
-               ${
-                 inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-               } // Conditional animation styles
-              `}
+                      group relative overflow-hidden rounded-lg cursor-pointer bg-card
+                      shadow-soft hover:shadow-hover
+                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
+                      ${
+                        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+                      } // Conditional animation styles
+                    `}
                     style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
                   >
                     <div className="relative h-96 overflow-hidden">
@@ -651,15 +670,15 @@ const Index = () => {
                   <div
                     ref={ref}
                     className={`
-                       bg-card p-8 rounded-lg 
-                       shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]
-                       transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
-                       ${
-                         inView
-                           ? "opacity-100 translate-y-0"
-                           : "opacity-0 translate-y-12"
-                       } // Conditional animation styles
-                      `}
+                      bg-card p-8 rounded-lg 
+                      shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]
+                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
+                      ${
+                        inView
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-12"
+                      } // Conditional animation styles
+                    `}
                     style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
                   >
                     <div className="flex gap-1 mb-4">
