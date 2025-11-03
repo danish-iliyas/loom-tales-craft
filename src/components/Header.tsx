@@ -1,25 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {
+  Menu,
+  X,
+  User,
+  Search,
+  ShoppingCart,
+} from "lucide-react";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   const isActive = (path) => location.pathname === path;
 
+  // Your 7 navigation links
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/services", label: "Services" },
@@ -30,158 +24,127 @@ const Header = () => {
     { path: "/contact", label: "Contact" },
   ];
 
-  const whatsappNumber = "+911234567890";
-  
-  const pagesWithHero = ['/', '/about', '/blog', '/collection', '/services', '/faqs', '/contact', '/book-appointment'];
-  const hasHeroImage = pagesWithHero.includes(location.pathname);
-
-  const isTransparent = hasHeroImage && !scrolled;
-
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-fade-in-down ${
-        isTransparent
-          ? "bg-transparent"
-          // ✅ CHANGED: Updated the background and border color for the scrolled state
-          : "bg-[#43305d]/95 backdrop-blur-sm border-b border-white/20 shadow-lg"
-      }`}
-    >
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <Link to="/" className="flex items-center space-x-2 group">
-            <h1
-              className={`font-display text-3xl font-bold transition-colors group-hover:text-white/80 ${
-                isTransparent
-                  ? "text-white drop-shadow-lg animate-text-flicker"
-                  // ✅ CHANGED: Text color to contrast with the new dark purple background
-                  : "text-white" 
-              }`}
+        {/* Main Header Bar */}
+        <div className="flex items-center justify-between h-24 relative">
+          
+          {/* Left: Mobile Menu Toggle */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-700 p-2"
+              aria-label="Toggle menu"
             >
-              Loom Tales
-            </h1>
-          </Link>
-
-          <nav className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link, index) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`relative px-4 py-2 font-body font-medium transition-all duration-300 group opacity-0 animate-fade-in-down ${
-                  isActive(link.path)
-                    // ✅ CHANGED: Text color for active link on scrolled header
-                    ? "text-white"
-                    : isTransparent
-                    ? "text-white hover:text-white/80"
-                    // ✅ CHANGED: Text color for inactive link on scrolled header
-                    : "text-gray-300 hover:text-white"
-                }`}
-                style={{ animationDelay: `${150 * (index + 2)}ms` }}
-              >
-                {link.label}
-                <span
-                  className={`
-                    absolute bottom-0 left-0 w-full h-0.5 transform origin-left 
-                    transition-transform duration-300 ease-in-out
-                    ${isActive(link.path) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"} 
-                    // ✅ CHANGED: Underline color to be white for both states
-                    bg-white`
-                  }
-                />
-              </Link>
-            ))}
-          </nav>
-
-          <div className="hidden lg:flex items-center gap-3">
-            <Button
-              asChild
-              variant="outline"
-              className="
-                relative overflow-hidden
-                bg-gradient-to-b from-[#c18c5d] to-[#8b5a36] text-[#2c1a0f]
-                font-serif tracking-wider text-[1.1rem] border-0 rounded-lg
-                px-6 h-12 shadow-[0_4px_12px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.2)]
-                transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
-                hover:from-[#b97b4c] hover:to-[#75482a] hover:shadow-[0_6px_20px_rgba(0,0,0,0.6)]
-                hover:text-white 
-                opacity-0 animate-fade-in-down"
-              style={{ animationDelay: '1200ms' }}
-            >
-              <a
-                href={`https://wa.me/${whatsappNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 z-10 relative transition-colors duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
-              >
-                <Phone className="w-4 h-4 transition-colors duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]" />
-                WhatsApp
-              </a>
-            </Button>
-            
-            <Button
-              asChild
-              variant="outline"
-              className="
-                relative overflow-hidden
-                bg-gradient-to-b from-[#c18c5d] to-[#8b5a36] text-[#2c1a0f]
-                font-serif tracking-wider text-[1rem] border-0 rounded-lg
-                px-4 h-12 shadow-[0_4px_12px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.2)]
-                transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
-                hover:from-[#b97b4c] hover:to-[#75482a] hover:text-white
-                after:absolute after:inset-0 after:rounded-lg after:shadow-[0_0_20px_4px_rgba(255,200,150,0.6)]
-                after:opacity-0 after:transition-opacity after:duration-500 hover:after:opacity-100
-                opacity-0 animate-fade-in-down"
-              style={{ animationDelay: '1300ms' }}
-            >
-              <a
-                href={`/book-appointment`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 z-10 relative transition-colors duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
-              >
-                <Phone className="w-4 h-4 transition-colors duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]" />
-                Book Now
-              </a>
-            </Button>
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
 
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className={`lg:hidden p-2 transition-colors ${
-              isTransparent
-                ? "text-white hover:text-white/80 drop-shadow-lg"
-                // ✅ CHANGED: Hamburger menu icon color on scrolled header
-                : "text-white hover:text-gray-300"
-            }`}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
+          {/* Empty div on the left for desktop to balance the layout */}
+          <div className="hidden lg:flex" />
 
-        {isOpen && (
-          // ✅ CHANGED: Mobile menu background color
-          <nav className="lg:hidden py-4 bg-[#5A386D]/95 backdrop-blur-sm animate-fade-in-down">
-            <div className="flex flex-col space-y-2 px-4">
+          {/* Center: Logo & Nav (Desktop) */}
+          <div className="hidden lg:flex flex-col items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Link to="/" className="flex items-center space-x-2 group">
+             <h1 className="font-serif text-3xl md:text-4xl font-medium text-gray-800 tracking-wider">
+  THE QALEENKAAR
+</h1>
+
+            </Link>
+            <nav className="flex items-center space-x-6 mt-3">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`px-4 py-3 rounded-md font-body font-medium transition-all ${
-                    isActive(link.path)
-                      // ✅ CHANGED: Active link style in mobile menu
-                      ? "bg-white/10 text-white"
-                      // ✅ CHANGED: Inactive link style in mobile menu
-                      : "text-gray-300 hover:bg-white/10 hover:text-white"
-                  }`}
+                  className={`
+                    font-serif text-sm uppercase tracking-widest transition-colors
+                    ${isActive(link.path) ? "text-gray-900 font-medium" : "text-gray-600 hover:text-gray-900"}
+                  `}
                 >
                   {link.label}
                 </Link>
               ))}
-            </div>
-          </nav>
-        )}
+            </nav>
+          </div>
+
+          {/* Center: Logo (Mobile) */}
+          <div className="lg:hidden flex justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+             <Link to="/">
+                <h1 className="font-serif text-2xl font-medium text-gray-800 tracking-wider">
+                  THE QALEENKAAR
+                </h1>
+             </Link>
+          </div>
+
+          {/* ✅ MOVED: Right Icons (Desktop) */}
+          <div className="hidden lg:flex items-center space-x-5">
+            <button className="text-gray-700 hover:text-gray-900" aria-label="My Account">
+              <User className="w-5 h-5" />
+            </button>
+            <button className="text-gray-700 hover:text-gray-900" aria-label="Search">
+              <Search className="w-5 h-5" />
+            </button>
+            <Link to="/cart" className="relative text-gray-700 hover:text-gray-900" aria-label="Cart">
+              <ShoppingCart className="w-5 h-5" />
+              <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-600 rounded-full">
+                0
+              </span>
+            </Link>
+            <button className="flex items-center text-gray-700 hover:text-gray-900">
+              <span className="font-serif text-sm mr-1">INR</span>
+              <span className="font-serif text-lg">₹</span>
+            </button>
+          </div>
+
+           {/* Right: Mobile Icons (Cart) */}
+           <div className="lg:hidden">
+             <Link to="/cart" className="relative text-gray-700 hover:text-gray-900 p-2">
+                <ShoppingCart className="w-5 h-5" />
+                <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-600 rounded-full">
+                  0
+                </span>
+              </Link>
+          </div>
+        </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isOpen && (
+        <nav className="lg:hidden py-4 bg-white border-t border-gray-200 shadow-lg animate-fade-in-down">
+          <div className="flex flex-col space-y-2 px-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsOpen(false)}
+                className={`px-4 py-3 rounded-md font-serif uppercase tracking-widest ${
+                  isActive(link.path)
+                    ? "bg-gray-100 text-gray-900"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            {/* Mobile menu icons */}
+            <div className="flex justify-around pt-4 border-t border-gray-200 mt-2">
+              <Link to="/profile" onClick={() => setIsOpen(false)} className="flex flex-col items-center text-gray-700 hover:text-gray-900">
+                <User className="w-5 h-5" />
+                <span className="text-xs mt-1">Profile</span>
+              </Link>
+              <button className="flex flex-col items-center text-gray-700 hover:text-gray-900">
+                <Search className="w-5 h-5" />
+                <span className="text-xs mt-1">Search</span>
+              </button>
+              <button className="flex flex-col items-center text-gray-700 hover:text-gray-900">
+                <span className="font-serif text-lg">₹</span>
+                <span className="text-xs mt-1">INR</span>
+              </button>
+            </div>
+          </div>
+        </nav>
+      )}
     </header>
   );
 };

@@ -13,13 +13,51 @@ import cleaningImg from "@/assets/service-cleaning.jpg";
 import collection1 from "@/assets/collection-1.jpg"; // Slide 2
 import collection2 from "@/assets/collection-2.jpg"; // Slide 3
 import collection3 from "@/assets/collection-3.jpg";
+import Slider from "react-slick";
 import { InView } from "react-intersection-observer";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css"
 // ✅ 1. Import Embla Carousel hooks
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
+import ReactBeforeSliderComponent from 'react-before-after-slider-component';
+import 'react-before-after-slider-component/dist/build.css';
+const rugImage = {
+  before: 'https://picsum.photos/id/1063/800/600?grayscale', // carpet
+  after: 'https://picsum.photos/id/1063/800/600'
+};
+
+const colorImage = {
+  before: 'https://picsum.photos/id/163/800/600?grayscale', // fabric
+  after: 'https://picsum.photos/id/163/800/600'
+};
 // This is the SVG you provided, turned into a reusable component
+// Custom arrow components (react-slick requires components, not just divs)
+const NextArrow = (props: any) => {
+  const { className, onClick } = props;
+  return (
+    <div
+      className={`${className} !flex !items-center !justify-center !right-3 !z-20 bg-[#c5aad4] hover:bg-[#e9e2ec] text-white w-7 h-7 rounded-full shadow-lg transition-all duration-300`}
+      onClick={onClick}
+    >
+      <span className="text-lg font-bold">{'›'}</span>
+    </div>
+  );
+};
+
+const PrevArrow = (props: any) => {
+  const { className, onClick } = props;
+  return (
+    <div
+      className={`${className} !flex !items-center !justify-center !left-3 !z-20 bg-[#ac92bb] hover:bg-[#ceb4dd] text-white w-7 h-7 rounded-full shadow-lg transition-all duration-300`}
+      onClick={onClick}
+    >
+      <span className="text-lg font-bold">{'‹'}</span>
+    </div>
+  );
+};
+
 const SectionIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -343,355 +381,362 @@ const Index = () => {
 
      {/* --- ✅ MODIFIED: Dual Care Services Section --- */}
 {/* --- ✅ MODIFIED: Dual Care Services Section --- */}
-      <section className="py-24 bg-secondary/30">
-        <div className="container mx-auto px-4">
-          
-          {/* 1. Main "SERVICES" Title */}
-          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
-            <h2 className="font-serif text-5xl md:text-6xl font-bold mb-6 text-gray-800 uppercase tracking-wider">
-              Services
-            </h2>
-          </div>
+     <section className="py-6 bg-secondary/30">
+  <div className="container mx-auto px-[0px] ">
+    {/* 1. Main "SERVICES" Title */}
+    <div className="text-center mx-auto mb-8 w-full">
+  <div className="inline-block bg-white px-6 py-2  shadow-[0_8px_20px_rgba(0,0,0,0.15)] border border-[#c6bec9]">
+    <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#794299] uppercase tracking-wider 
+  drop-shadow-[2px_2px_0px_#e8d2ff]">
+  Services
+</h2>
+  </div>
+</div>
 
-          {/* 2. Main 2-column grid (Carpet vs Shawl) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-12 gap-y-16">
-            
-            {/* --- 3. CARPETS COLUMN (Left) --- */}
-            <div>
-              {/* Carpet Column Title */}
-              <h3 className="font-serif text-3xl text-center font-medium text-gray-700 uppercase tracking-widest mb-8">
-                Carpet
-              </h3>
-              
-              {/* ✅ UPDATED: Carpet Main Image (now a full card) */}
-              <div className="group relative h-96 w-full overflow-hidden rounded-2xl shadow-lg cursor-pointer mb-12 animate-fade-in">
-                {/* Image as background */}
-                <img
-                  src={repairImg} // Your main carpet image
-                  alt="Carpet Care"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                />
-                
-                {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-                {/* Content (Badge, Title, Link) */}
-                <div className="relative z-10 flex flex-col justify-between h-full p-6">
-                  <div>
-                    <span className="inline-block bg-[#794299] text-white px-4 py-1.5 rounded-full font-serif text-sm font-medium">
-                      Carpet
-                    </span>
-                  </div>
-                  <div className="transition-transform duration-500 group-hover:-translate-y-1">
-                    <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-md leading-tight">
-                      Professional Washing
-                    </h3>
-                    <Link
-                      to="/services/carpet-washing" // Link for the main carpet service
-                      className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-base group-hover:gap-1 mt-0 opacity-0 group-hover:opacity-100"
-                    >
-                      View Details
-                      <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Carpet Services Grid (2x2) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                {carpetServices.map((service, index) => (
-                  <InView
-                    key={index}
-                    triggerOnce
-                    threshold={0.1}
-                    rootMargin="0px 0px -50px 0px"
-                  >
-                    {({ ref, inView }) => (
-                      <div
-                        ref={ref}
-                        className={`
-                          group relative h-80 w-full overflow-hidden rounded-2xl shadow-lg cursor-pointer
-                          transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
-                          ${
-                            inView
-                              ? "opacity-100 translate-y-0"
-                              : "opacity-0 translate-y-12"
-                          }
-                        `}
-                        style={{ transitionDelay: `${index * 100}ms` }}
-                      >
-                        {/* 1. Image (as background) */}
-                        <img
-                          src={service.image}
-                          alt={service.title}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                        />
-                        
-                        {/* 2. Dark Overlay (for text readability) */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+    {/* 2. Main 2-column grid (Carpet vs Shawl) */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-12 gap-y-16">
+      {/* --- 3. CARPETS COLUMN (Left) --- */}
+      <div>
+        {/* Carpet Column Title */}
+        <h3 className="font-serif text-3xl text-center font-medium text-gray-700 uppercase tracking-widest mb-4">
+          Carpet
+        </h3>
 
-                        {/* 3. Content (relative to position elements) */}
-                        <div className="relative z-10 flex flex-col justify-between h-full p-6">
-                          {/* Badge (Top-left) - Styled like screenshot */}
-                          {service.type && (
-                            <div>
-                              <span className="inline-block bg-[#794299] text-white px-4 py-1.5 rounded-full font-serif text-sm font-medium">
-                                {service.type}
-                              </span>
-                            </div>
-                          )}
+        {/* Carpet Main Image (h-96) */}
+       
 
-                          {/* Title & Link (Bottom-left) - Styled like screenshot */}
-                          <div className="transition-transform duration-500 group-hover:-translate-y-1">
-                            <h3 className="font-serif text-3xl font-bold text-white mb-1 drop-shadow-md">
-                              {service.title}
-                            </h3>
-                            
-                            {/* Kept your original "View Details" link, appears on hover */}
-                            <Link
-                              to={service.linkTo}
-                              className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-sm group-hover:gap-1 mt-0 opacity-0 group-hover:opacity-100"
-                            >
-                              View Details
-                              <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </InView>
-                ))}
-              </div>
-            </div> {/* End carpet column */}
-
-            {/* --- 4. SHAWLS COLUMN (Right) --- */}
-            <div>
-              {/* Shawl Column Title */}
-              <h3 className="font-serif text-3xl text-center font-medium text-gray-700 uppercase tracking-widest mb-8">
-                Shawl
-              </h3>
-              
-              {/* ✅ UPDATED: Shawl Main Image (now a full card) */}
-              <div className="group relative h-96 w-full overflow-hidden rounded-2xl shadow-lg cursor-pointer mb-12 animate-fade-in">
-                {/* Image as background */}
-                <img
-                  src={exchangeImg} // Your main shawl image
-                  alt="Shawl Care"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                />
-
-                {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                {/* Content (Badge, Title, Link) */}
-                <div className="relative z-10 flex flex-col justify-between h-full p-6">
-                  <div>
-                    <span className="inline-block bg-[#794299] text-white px-4 py-1.5 rounded-full font-serif text-sm font-medium">
-                      Shawl
-                    </span>
-                  </div>
-                  <div className="transition-transform duration-500 group-hover:-translate-y-1">
-                    <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-md leading-tight">
-                      Expert Repair
-                    </h3>
-                    <Link
-                      to="/services/shawl-repair" // Link for the main shawl service
-                      className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-base group-hover:gap-1 mt-0 opacity-0 group-hover:opacity-100"
-                    >
-                      View Details
-                      <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Shawl Services Grid (2x2) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                {shawlServices.map((service, index) => (
-                  <InView
-                    key={index}
-                    triggerOnce
-                    threshold={0.1}
-                    rootMargin="0px 0px -50px 0px"
-                  >
-                    {({ ref, inView }) => (
-                      <div
-                        ref={ref}
-                        className={`
-                          group relative h-80 w-full overflow-hidden rounded-2xl shadow-lg cursor-pointer
-                          transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
-                          ${
-                            inView
-                              ? "opacity-100 translate-y-0"
-                              : "opacity-0 translate-y-12"
-                          }
-                        `}
-                        style={{
-                          transitionDelay: `${
-                            (carpetServices.length + index) * 100
-                          }ms`,
-                        }}
-                      >
-                        {/* 1. Image (as background) */}
-                        <img
-                          src={service.image}
-                          alt={service.title}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                        />
-                        
-                        {/* 2. Dark Overlay (for text readability) */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                        {/* 3. Content (relative to position elements) */}
-                        <div className="relative z-10 flex flex-col justify-between h-full p-6">
-                          {/* Badge (Top-left) - Styled like screenshot */}
-                          {service.type && (
-                            <div>
-                              <span className="inline-block bg-[#794299] text-white px-4 py-1.5 rounded-full font-serif text-sm font-medium">
-                                {service.type}
-                              </span>
-                            </div>
-                          )}
-
-                          {/* Title & Link (Bottom-left) - Styled like screenshot */}
-                          <div className="transition-transform duration-500 group-hover:-translate-y-1">
-                            <h3 className="font-serif text-3xl font-bold text-white mb-1 drop-shadow-md">
-                              {service.title}
-                            </h3>
-                            
-                            {/* Kept your original "View Details" link, appears on hover */}
-                            <Link
-                              to={service.linkTo}
-                              className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-sm group-hover:gap-1 mt-0 opacity-0 group-hover:opacity-100"
-                            >
-                              View Details
-                              <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </InView>
-                ))}
-              </div>
-            </div> {/* End shawl column */}
-            
-          </div> {/* End 2-column grid */}
-
-          {/* 5. "View All" Button */}
-          <div className="text-center mt-20 animate-fade-in">
-            <Button
-              asChild
-              size="lg"
-              className="bg-[#5A386D] hover:bg-[#62009b] text-lg px-8 mb-9 transition-all duration-200 ease-out transform hover:scale-[1.02]"
+        {/* ✅ UPDATED: Carpet Services Grid (Stacked) */}
+        <div className="grid grid-cols-1 gap-8">
+          {carpetServices.map((service, index) => (
+            <InView
+              key={index}
+              triggerOnce
+              threshold={0.1}
+              rootMargin="0px 0px -50px 0px"
             >
-              <Link to="/services">
-                View All Services
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
-          </div>
-        </div> {/* End container */}
-      </section>
-      {/* --- END: Dual Care Services Section --- */}
-      {/* --- END: Dual Care Services Section --- */}
+              {({ ref, inView }) => (
+                <div
+                  ref={ref}
+                  className={`
+                    {/* ✅ UPDATED: Height changed from h-80 to h-96 */}
+                    group relative h-96 w-full overflow-hidden rounded-2xl shadow-lg cursor-pointer
+                    transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
+                    ${
+                      inView
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-12"
+                    }
+                  `}
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  {/* 1. Image (as background) */}
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                  />
 
-      {/* Collections Section */}
-      <section className="py-24 bg-gradient-to-b from-background to-secondary/30">
-        <div className="container mx-auto px-2 sm:px-4 ">
-          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
-            <div className="inline-block mb-4">
-              <SectionIcon />
-            </div>
-            <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
-              Collections
-            </h2>
-            <p className="font-body text-lg text-muted-foreground leading-relaxed">
-              Beautifully crafted and ethically sourced, our handmade area rugs
-              bring warmth, style, and authenticity to any space.
-            </p>
-          </div>
+                  {/* 2. Dark Overlay (for text readability) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {/* 2. Update Collections Section Card Mapping */}
-            {collections.map((item, index) => (
-              <InView
-                key={index}
-                triggerOnce
-                threshold={0.1}
-                rootMargin="0px 0px -50px 0px"
-              >
-                {({ ref, inView }) => (
-                  <div
-                    ref={ref}
-                    className={`
-                      group relative overflow-hidden rounded-lg cursor-pointer bg-card
-                      shadow-soft hover:shadow-hover
-                      transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] // Animation
-                      ${
-                        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-                      } // Conditional animation styles
-                    `}
-                    style={{ transitionDelay: `${index * 100}ms` }} // Optional staggered delay
-                  >
-                    <div className="relative h-96 overflow-hidden">
-                      {" "}
-                      {/* Adjusted height */}
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      {/* Darker gradient applied always for readability */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none" />
-                      {/* Text content absolutely positioned */}
-                      <div className="absolute bottom-0 left-0 p-5 text-white w-full transition-transform duration-500 group-hover:-translate-y-1">
-                        {/* Optional: Type Badge if needed */}
-                        {item.type && (
-                          <span className="inline-block px-3 py-1 bg-[#62009b]/80 backdrop-blur-sm rounded-full text-xs mb-2">
-                            {item.type}
-                          </span>
-                        )}
-                        <h3 className="font-display text-2xl font-bold drop-shadow-md">
-                          {item.title}
-                        </h3>
-                        {/* Added WhatsApp link similar to CollectionCard */}
-                        <a
-                          href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                            `Hi, I'm interested in ${item.title}. Can you provide more details?`
-                          )}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-sm group-hover:gap-1 mt-2 opacity-0 group-hover:opacity-100"
-                        >
-                          View Details
-                          <MessageCircle className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                        </a>
+                  {/* 3. Content (relative to position elements) */}
+                  <div className="relative z-10 flex flex-col justify-between h-full p-6">
+                    {/* Badge (Top-left) - Styled like screenshot */}
+                    {service.type && (
+                      <div>
+                        <span className="inline-block bg-[#794299] text-white px-4 py-1.5 rounded-full font-serif text-sm font-medium">
+                          {service.type}
+                        </span>
                       </div>
+                    )}
+
+                    {/* Title & Link (Bottom-left) - Matches main card style */}
+                    <div className="transition-transform duration-500 group-hover:-translate-y-1">
+                      <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-md leading-tight">
+                        {service.title}
+                      </h3>
+                      <Link
+                        to={service.linkTo}
+                        className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-base group-hover:gap-1 mt-0 opacity-0 group-hover:opacity-100"
+                      >
+                        View Details
+                        <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                      </Link>
                     </div>
                   </div>
-                )}
-              </InView>
-            ))}
-          </div>
-
-          <div className="text-center animate-fade-in">
-            <Button
-              asChild
-              size="lg"
-              className="bg-[#5A386D] hover:bg-[#62009b] text-lg px-8 transition-all duration-200 ease-out transform hover:scale-[1.02]"
-            >
-              <Link to="/collection">
-                Explore Collection
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
-          </div>
+                </div>
+              )}
+            </InView>
+          ))}
         </div>
-      </section>
+      </div>{" "}
+      {/* End carpet column */}
+      {/* --- 4. SHAWLS COLUMN (Right) --- */}
+      <div>
+        {/* Shawl Column Title */}
+        <h3 className="font-serif text-3xl text-center font-medium text-gray-700 uppercase tracking-widest mb-4">
+          Shawl
+        </h3>
+
+        {/* Shawl Main Image (h-96) */}
+       
+
+        {/* ✅ UPDATED: Shawl Services Grid (Stacked) */}
+        <div className="grid grid-cols-1 gap-8">
+          {shawlServices.map((service, index) => (
+            <InView
+              key={index}
+              triggerOnce
+              threshold={0.1}
+              rootMargin="0px 0px -50px 0px"
+            >
+              {({ ref, inView }) => (
+                <div
+                  ref={ref}
+                  className={`
+                    {/* ✅ UPDATED: Height changed from h-80 to h-96 */}
+                    group relative h-96 w-full overflow-hidden rounded-2xl shadow-lg cursor-pointer
+                    transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
+                    ${
+                      inView
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-12"
+                    }
+                  `}
+                  style={{
+                    transitionDelay: `${
+                      (carpetServices.length + index) * 100
+                    }ms`,
+                  }}
+                >
+                  {/* 1. Image (as background) */}
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                  />
+
+                  {/* 2. Dark Overlay (for text readability) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                  {/* 3. Content (relative to position elements) */}
+                  <div className="relative z-10 flex flex-col justify-between h-full p-6">
+                    {/* Badge (Top-left) - Styled like screenshot */}
+                    {service.type && (
+                      <div>
+                        <span className="inline-block bg-[#794299] text-white px-4 py-1.5 rounded-full font-serif text-sm font-medium">
+                          {service.type}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Title & Link (Bottom-left) - Matches main card style */}
+                    <div className="transition-transform duration-500 group-hover:-translate-y-1">
+                      <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-md leading-tight">
+                        {service.title}
+                      </h3>
+                      <Link
+                        to={service.linkTo}
+                        className="inline-flex items-center text-accent hover:text-white font-medium transition-all duration-300 text-base group-hover:gap-1 mt-0 opacity-0 group-hover:opacity-100"
+                      >
+                        View Details
+                        <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </InView>
+          ))}
+        </div>
+      </div>{" "}
+      {/* End shawl column */}
+    </div>{" "}
+    {/* End 2-column grid */}
+    {/* 5. "View All" Button */}
+    <div className="text-center mt-20 animate-fade-in">
+      <Button
+        asChild
+        size="lg"
+        className="bg-[#5A386D] hover:bg-[#62009b] text-lg px-8 mb-9 transition-all duration-200 ease-out transform hover:scale-[1.02]"
+      >
+        <Link to="/services">
+          View All Services
+          <ArrowRight className="ml-2 w-5 h-5" />
+        </Link>
+      </Button>
+    </div>
+  </div>{" "}
+  {/* End container */}
+</section>
+      {/* --- END: Dual Care Services Section --- */}
+      {/* --- END: Dual Care Services Section --- */}
+{/* --- VIDEO SECTION --- */}
+{/* Place this section after your 'services' section */}
+{/* --- VIDEO SECTION --- */}
+
+<section className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden">
+ 
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="absolute inset-0 w-full h-full object-cover z-0"
+    // ✅ UPDATED: Video src is now related to rugs
+    src="https://www.youtube.com/watch?v=SNIHII7Pjb8&list=RDoasP8clIHI0&index=4"
+    // 👇 You can still use one of your images as a poster
+    poster={repairImg} 
+  >
+    Your browser does not support the video tag.
+  </video>
+
+  {/* 2. Dark Overlay */}
+  <div className="absolute inset-0 bg-black/60 z-10" />
+
+  {/* 3. Content */}
+  <div className="relative z-20 h-full flex items-center justify-center">
+    <div className="container mx-auto px-4 text-center">
+      <h2 className="font-sans text-2xl md:text-3xl font-light text-white uppercase tracking-widest animate-fade-in">
+        Because you deserve to shine!
+      </h2>
+    </div>
+  </div>
+</section>
+
+{/* --- YOUTUBE VIDEO SECTION --- */}
+
+{/* <section className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden">
+  
+ 
+  <iframe
+    className="absolute top-1/2 left-1/2 w-full h-full min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 z-0"
+    src="https://www.youtube.com/embed/SNIHII7Pjb8?si=odObuwsWpnBfRyiu&autoplay=1&mute=1&loop=1&playlist=SNIHII7Pjb8&controls=0&showinfo=0"
+    frameBorder="0"
+    allow="autoplay; encrypted-media"
+    allowFullScreen
+    title="YouTube Background Video"
+  ></iframe>
+
+  <div className="absolute inset-0 bg-black/60 z-10" />
+
+  {/* 3. Content (This stays the same) */}
+  {/* <div className="relative z-20 h-full flex items-center justify-center">
+    <div className="container mx-auto px-4 text-center">
+      <h2 className="font-sans text-2xl md:text-3xl font-light text-white uppercase tracking-widest animate-fade-in">
+        Because you deserve to shine!
+      </h2>
+    </div>
+  </div>
+</section>  */}
+
+      {/* Collections Section */}
+ <section className="py-8 bg-gradient-to-b from-background to-secondary/30 overflow-hidden">
+  <div className="container mx-auto px-2 sm:px-4 overflow-hidden">
+    {/* === Section Header === */}
+    <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+      <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
+        Collections
+      </h2>
+      {/* <p className="font-body text-lg text-muted-foreground leading-relaxed">
+        Beautifully crafted and ethically sourced, our handmade area rugs
+        bring warmth, style, and authenticity to any space.
+      </p> */}
+    </div>
+
+    {/* === Carousel === */}
+    <div className="relative overflow-hidden">
+      <Slider
+        dots={false}
+        infinite
+        speed={800}
+        slidesToShow={2}
+        slidesToScroll={1}
+        autoplay
+        autoplaySpeed={3500}
+        nextArrow={<NextArrow />}
+        prevArrow={<PrevArrow />}
+        responsive={[
+          { breakpoint: 1024, settings: { slidesToShow: 2 } },
+          { breakpoint: 768, settings: { slidesToShow: 1 } },
+        ]}
+      >
+        {collections.map((item, index) => (
+          <InView
+            key={index}
+            triggerOnce
+            threshold={0.1}
+            rootMargin="0px 0px -50px 0px"
+          >
+            {({ ref, inView }) => (
+              <div ref={ref} className="px-4">
+                <div
+                  className={`group relative overflow-hidden cursor-pointer bg-card shadow-soft hover:shadow-hover transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
+                    inView
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-12"
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  {/* === Image === */}
+                  <div className="relative h-[400px] overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 p-5 text-white w-full transition-transform duration-500 group-hover:-translate-y-1">
+                      {item.type && (
+                        <span className="inline-block px-3 py-1 bg-[#62009b]/80 backdrop-blur-sm rounded-full text-xs mb-2">
+                          {item.type}
+                        </span>
+                      )}
+                      <h3 className="font-display text-2xl font-bold drop-shadow-md">
+                        {item.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* === Fixed Text Below Image === */}
+                  <div className="text-center py-4 bg-white">
+                    {index % 2 === 0 ? (
+                      <h4 className="text-xl font-serif text-[#5A386D] uppercase tracking-wide">
+                        Carpet
+                      </h4>
+                    ) : (
+                      <h4 className="text-xl font-serif text-[#5A386D] uppercase tracking-wide">
+                        Shawl
+                      </h4>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </InView>
+        ))}
+      </Slider>
+    </div>
+
+    {/* === Button === */}
+    <div className="text-center mt-16 animate-fade-in">
+      <Button
+        asChild
+        size="lg"
+        className="bg-[#5A386D] hover:bg-[#62009b] text-lg px-8 transition-all duration-200 ease-out transform hover:scale-[1.02]"
+      >
+        <Link to="/collection">
+          Explore Collection
+          <ArrowRight className="ml-2 w-5 h-5" />
+        </Link>
+      </Button>
+    </div>
+  </div>
+</section>;
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-gradient-to-b from-secondary/30 to-background">
+      <section className="py-8 bg-gradient-to-b from-secondary/30 to-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
             <h2 className="font-display text-4xl md:text-6xl font-bold mb-6 text-[#5A386D]">
@@ -766,6 +811,97 @@ const Index = () => {
           </div>
         </div>
       </section>
+    {/* for befor after work */}
+ <section className="py-12 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4">
+
+        {/* Section Heading */}
+        <h2 className="text-center font-serif text-2xl md:text-4xl font-medium text-gray-800 tracking-wider mb-10">
+          OUR WORK
+        </h2>
+
+        {/* Here is the single slider.
+          The layouts are now placed directly inside the 'firstImage' and 'secondImage' props.
+        */}
+        <div className="shadow-xl rounded-xl overflow-hidden border">
+          <ReactBeforeSliderComponent
+            delimiterColor="#ffffff"
+            delimiterWidth={3}
+            
+            // --- 1. THE "BEFORE" VIEW (INLINE) ---
+            firstImage={
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-white">
+  
+                {/* Card 1: Rug BEFORE */}
+                <div className="border rounded-lg overflow-hidden shadow-lg">
+                  <div className="relative">
+                    <img src={rugImage.before} alt="Rug Before" className="h-64 w-full object-cover" />
+                    <span className="absolute bottom-2 left-2 bg-black text-white text-xs font-bold px-2 py-1 rounded">
+                      BEFORE
+                    </span>
+                  </div>
+                  <div className="p-4 text-center font-serif">
+                    <h3 className="text-lg font-bold tracking-wide">Rug Restoration</h3>
+                    <p className="text-gray-600 text-sm mt-1">Faded and damaged condition</p>
+                  </div>
+                </div>
+                
+                {/* Card 2: Color BEFORE */}
+                <div className="border rounded-lg overflow-hidden shadow-lg">
+                  <div className="relative">
+                    <img src={colorImage.before} alt="Color Before" className="h-64 w-full object-cover" />
+                    <span className="absolute bottom-2 left-2 bg-black text-white text-xs font-bold px-2 py-1 rounded">
+                      BEFORE
+                    </span>
+                  </div>
+                  <div className="p-4 text-center font-serif">
+                    <h3 className="text-lg font-bold tracking-wide">Color Restoration</h3>
+                    <p className="text-gray-600 text-sm mt-1">Dull and faded wool</p>
+                  </div>
+                </div>
+
+              </div>
+            }
+            
+            // --- 2. THE "AFTER" VIEW (INLINE) ---
+            secondImage={
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-white">
+  
+                {/* Card 1: Rug AFTER */}
+                <div className="border rounded-lg overflow-hidden shadow-lg">
+                  <div className="relative">
+                    <img src={rugImage.after} alt="Rug After" className="h-64 w-full object-cover" />
+                    <span className="absolute bottom-2 right-2 bg-green-700 text-white text-xs font-bold px-2 py-1 rounded">
+                      AFTER
+                    </span>
+                  </div>
+                  <div className="p-4 text-center font-serif">
+                    <h3 className="text-lg font-bold tracking-wide">Rug Restoration</h3>
+                    <p className="text-gray-600 text-sm mt-1">Handmade repair & deep cleaning</p>
+                  </div>
+                </div>
+                
+                {/* Card 2: Color AFTER */}
+                <div className="border rounded-lg overflow-hidden shadow-lg">
+                  <div className="relative">
+                    <img src={colorImage.after} alt="Color After" className="h-64 w-full object-cover" />
+                    <span className="absolute bottom-2 right-2 bg-green-700 text-white text-xs font-bold px-2 py-1 rounded">
+                      AFTER
+                    </span>
+                  </div>
+                  <div className="p-4 text-center font-serif">
+                    <h3 className="text-lg font-bold tracking-wide">Color Restoration</h3>
+                    <p className="text-gray-600 text-sm mt-1">Reviving natural wool colors</p>
+                  </div>
+                </div>
+
+              </div>
+            }
+          />
+        </div>
+
+      </div>
+    </section>
 
       {/* Appointment Section */}
       <section className="py-24 bg-white from-primary via-primary-dark to-primary relative overflow-hidden">
